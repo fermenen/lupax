@@ -1,6 +1,10 @@
 
 # lupax. FRONTEND
 
+[![DeepSource](https://deepsource.io/gh/fermenen/lupax.svg/?label=active+issues&show_trend=true&token=a0TxGUo1Z3vlE7CwmnEZMxpW)](https://deepsource.io/gh/fermenen/lupax/?ref=repository-badge)
+
+[![DeepSource](https://deepsource.io/gh/fermenen/lupax.svg/?label=resolved+issues&show_trend=true&token=a0TxGUo1Z3vlE7CwmnEZMxpW)](https://deepsource.io/gh/fermenen/lupax/?ref=repository-badge)
+
 Project that provides the lupax frontend
 
 
@@ -41,7 +45,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 [react-table]: https://www.npmjs.com/package/react-table
 [react-icons]: https://react-icons.github.io/react-icons/
 [react-media-recorder]: https://github.com/0x006F/react-media-recorder
-[react-sortable-hoc] : https://github.com/clauderic/react-sortable-hoc
+[react-sortable-hoc]: https://github.com/clauderic/react-sortable-hoc
 
 
 
