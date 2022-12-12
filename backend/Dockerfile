@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.9
 
 WORKDIR /code
 
@@ -11,4 +11,4 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 COPY ./sql_app /code/sql_app
 COPY ./alembic /code/alembic
 
-CMD alembic upgrade head && uvicorn sql_app.main:app --host 0.0.0.0 --port $PORT
+CMD  alembic upgrade head && uvicorn sql_app.main:app --host 0.0.0.0 --port $PORT

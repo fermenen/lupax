@@ -1,11 +1,13 @@
 import os
 from google.cloud import storage
 import datetime
-
+from google.auth import compute_engine
 
 class StorageCloud(object):
+    
+    credentials = compute_engine.Credentials()
 
-    storage_client = storage.Client()
+    storage_client = storage.Client(credentials=credentials)
 
     def get_bucket(self, bucket=os.environ.get('BUCKET')):
         return self.storage_client.bucket(bucket)

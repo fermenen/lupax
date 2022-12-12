@@ -23,9 +23,9 @@ With docker:
 
 ```bash
 
-docker build --tag lupax-app .
+docker build --tag lupax-api:v1 .
 
-docker run --env-file .env --add-host host.docker.internal:host-gateway lupax-app
+docker run --env-file .env --add-host host.docker.internal:host-gateway lupax-api:v1
 
 ```
 
