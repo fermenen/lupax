@@ -16,6 +16,17 @@ First, run the development server:
 npm run dev
 ```
 
+
+With docker:
+
+```bash
+
+docker build --tag lupax-frontend:v1 .
+
+docker run lupax-frontend:v1
+
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 
