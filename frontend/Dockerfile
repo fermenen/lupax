@@ -32,7 +32,13 @@ RUN yarn build
 
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
+
+# Install bash for env.sh
+RUN apk add --no-cache bash
+
 WORKDIR /app
+
+COPY  env.sh ./
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
@@ -55,4 +61,7 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD $(for i in `cat .env`; do out+="--build-arg $i " ; done; echo $out;out="") && ["node", "server.js"]
+RUN chmod +x ./env.sh
+ENTRYPOINT ["./env.sh"]
+
+CMD ["node", "server.js"]
