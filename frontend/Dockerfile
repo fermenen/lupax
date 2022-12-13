@@ -32,13 +32,7 @@ RUN yarn build
 
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
-
-# Install bash for env.sh
-RUN apk add --no-cache bash
-
 WORKDIR /app
-
-COPY  env.sh ./
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
@@ -54,14 +48,10 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-
 USER nextjs
 
 EXPOSE 3000
 
 ENV PORT 3000
-
-RUN chmod +x ./env.sh
-ENTRYPOINT ["./env.sh"]
 
 CMD ["node", "server.js"]
