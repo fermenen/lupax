@@ -28,7 +28,7 @@ type AppPropsWithLayout = AppProps & {
 }
 
 if (typeof window !== 'undefined') {
-  console.info("holaaaaaaa", process.env.NEXT_PUBLIC_URL_BASE_API)
+  console.info("holaaaaaaa", process.env.NODE_ENV)
   // we only want to call this init function on the frontend, so we check typeof window !== 'undefined'
   SuperTokensReact.init({
     appInfo: {
