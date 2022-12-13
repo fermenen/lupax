@@ -1,7 +1,7 @@
-
 const nextConfig = {
   reactStrictMode: true,
-  output: 'standalone',
+  output: "standalone",
+
   async rewrites() {
     return [
       {
@@ -14,6 +14,7 @@ const nextConfig = {
       },
     ];
   },
+
 }
 
 module.exports = nextConfig
