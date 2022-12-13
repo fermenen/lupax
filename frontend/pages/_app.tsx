@@ -11,7 +11,7 @@ import { extendTheme } from "@chakra-ui/react";
 import { myColors } from '../theme/theme';
 
 if (`${process.env.NEXT_PUBLIC_WEBSITE_DOMAIN}` !== "http://localhost:3000") {
-  Sentry.init({ dsn: `${process.env.NEXT_PUBLIC_DSN_GLITCHTIP}` }); // This initiliazes sentry 
+  // Sentry.init({ dsn: `${process.env.NEXT_PUBLIC_DSN_GLITCHTIP}` }); // This initiliazes sentry 
   splitbee.init({
     scriptUrl: "/bee.js",
     apiUrl: "/_hive",
