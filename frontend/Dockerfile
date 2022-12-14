@@ -18,10 +18,8 @@ RUN \
 FROM node:16-alpine AS builder
 
 
-ENV NEXT_PUBLIC_CASA $NEXT_PUBLIC_WEBSITE_DOMAIN
-
-
-
+ARG NEXT_PUBLIC_WEBSITE_DOMAIN
+ENV NEXT_PUBLIC_CASA=$NEXT_PUBLIC_WEBSITE_DOMAIN
 
 
 WORKDIR /app
@@ -43,8 +41,6 @@ FROM node:16-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
-
-ENV NEXT_PUBLIC_CASA $NEXT_PUBLIC_WEBSITE_DOMAIN
 
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
