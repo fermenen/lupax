@@ -238,7 +238,7 @@ def default_url_is_valid(url):
     """
     result = urlparse(url)
 
-    if result.scheme == "http" or result.scheme == "https":
+    if result.scheme in ("http", "https"):
         path = result.path.lower()
         if (
             path.endswith(".jpg")
