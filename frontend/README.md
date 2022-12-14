@@ -21,9 +21,9 @@ With docker:
 
 ```bash
 
-docker build --tag lupax-frontend:v1 .
+docker build -t lupax-frontend:v1 .
 
-docker run lupax-frontend:v1
+docker run --rm -it -p 8080:3000 --name lupax-front lupax-frontend:v1
 
 ```
 

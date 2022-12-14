@@ -1,16 +1,16 @@
-import type { AppProps } from 'next/app';
 import * as Sentry from "@sentry/browser";
 import splitbee from '@splitbee/web';
-import { ChakraProvider } from '@chakra-ui/react';
-import { ReactElement, ReactNode } from 'react';
-import type { NextPage } from 'next';
 import SuperTokensReact from 'supertokens-auth-react';
 import SessionReact from 'supertokens-auth-react/recipe/session';
 import EmailPasswordReact from 'supertokens-auth-react/recipe/emailpassword';
+import type { AppProps } from 'next/app';
+import type { NextPage } from 'next';
+import { ChakraProvider } from '@chakra-ui/react';
+import { ReactElement, ReactNode } from 'react';
 import { extendTheme } from "@chakra-ui/react";
 import { myColors } from '../theme/theme';
 
-console.info("adios", process.env.NODE_ENV )
+console.info("mi", process.env.NEXT_PUBLIC_CASA )
 
 if (process.env.NODE_ENV == "production") {
   Sentry.init({ dsn: process.env.DSN_GLITCHTIP }); // This initiliazes sentry 
