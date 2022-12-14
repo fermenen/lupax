@@ -50,11 +50,9 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? ((page) => page)
 
-
   const theme = extendTheme({
     colors: myColors
   })
-
 
   return getLayout(
     <ChakraProvider theme={theme}>
@@ -62,4 +60,3 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
     </ChakraProvider>
   )
 }
-
