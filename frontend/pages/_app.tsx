@@ -10,12 +10,14 @@ import EmailPasswordReact from 'supertokens-auth-react/recipe/emailpassword';
 import { extendTheme } from "@chakra-ui/react";
 import { myColors } from '../theme/theme';
 
-if (`${process.env.NEXT_PUBLIC_WEBSITE_DOMAIN}` !== "http://localhost:3000") {
-  // Sentry.init({ dsn: `${process.env.NEXT_PUBLIC_DSN_GLITCHTIP}` }); // This initiliazes sentry 
-  splitbee.init({
+console.info("adios", process.env.NODE_ENV )
+
+if (process.env.NODE_ENV == "production") {
+  Sentry.init({ dsn: process.env.DSN_GLITCHTIP }); // This initiliazes sentry 
+  splitbee.init({ // This initiliazes Splitbee.js
     scriptUrl: "/bee.js",
     apiUrl: "/_hive",
-  }) // This initiliazes Splitbee.js
+  }) 
 }
 
 
@@ -28,7 +30,6 @@ type AppPropsWithLayout = AppProps & {
 }
 
 if (typeof window !== 'undefined') {
-  console.info("holaaaaaaa", process.env.NODE_CASA)
   // we only want to call this init function on the frontend, so we check typeof window !== 'undefined'
   SuperTokensReact.init({
     appInfo: {
