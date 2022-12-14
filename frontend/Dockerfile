@@ -42,6 +42,9 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
+ARG NEXT_PUBLIC_WEBSITE_DOMAIN
+ENV NEXT_PUBLIC_CASA=$NEXT_PUBLIC_WEBSITE_DOMAIN
+
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
