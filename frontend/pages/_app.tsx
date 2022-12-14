@@ -10,14 +10,12 @@ import { ReactElement, ReactNode } from 'react';
 import { extendTheme } from "@chakra-ui/react";
 import { myColors } from '../theme/theme';
 
-console.info("mi", process.env.NEXT_PUBLIC_CASA )
-
-if (process.env.NODE_ENV == "production") {
+if (process.env.NEXT_PUBLIC_WEBSITE_DOMAIN !== "http://localhost:3000") {
   Sentry.init({ dsn: process.env.DSN_GLITCHTIP }); // This initiliazes sentry 
   splitbee.init({ // This initiliazes Splitbee.js
     scriptUrl: "/bee.js",
     apiUrl: "/_hive",
-  }) 
+  })
 }
 
 

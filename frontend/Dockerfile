@@ -17,11 +17,6 @@ RUN \
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
 
-
-ARG NEXT_PUBLIC_WEBSITE_DOMAIN
-ENV NEXT_PUBLIC_CASA=$NEXT_PUBLIC_WEBSITE_DOMAIN
-
-
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -42,8 +37,6 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-ARG NEXT_PUBLIC_WEBSITE_DOMAIN
-ENV NEXT_PUBLIC_CASA=$NEXT_PUBLIC_WEBSITE_DOMAIN
 
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
