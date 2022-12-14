@@ -18,7 +18,7 @@ RUN \
 FROM node:16-alpine AS builder
 
 
-ENV NEXT_PUBLIC_CASA='casa'
+ENV NEXT_PUBLIC_CASA=$_CASA
 
 
 WORKDIR /app
