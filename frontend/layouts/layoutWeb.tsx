@@ -2,7 +2,7 @@ import Head from 'next/head';
 import NextLink from "next/link";
 import React, { ReactNode } from 'react';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { ChevronDownIcon, ChevronRightIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { FiHome } from 'react-icons/fi';
 import { Logo } from '../components/svg/logo';
 import { useUserLogin } from '../services/users.service';
@@ -27,9 +27,6 @@ import {
     LinkOverlay,
     Show,
     useDisclosure,
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
     Link
 } from '@chakra-ui/react';
 
@@ -166,6 +163,10 @@ export default function GetLayoutWeb(page: ReactElement) {
                         <Stack align={'flex-start'}>
                             <ListHeader>Legal</ListHeader>
                             <Link href={'/privacy'}>Privacy Policy</Link>
+                        </Stack>
+                        <Stack align={'flex-start'}>
+                            <ListHeader>Developers</ListHeader>
+                            <Link href={`${process.env.NEXT_PUBLIC_URL_BASE_API}/documentation/`}>API References</Link>
                         </Stack>
                     </SimpleGrid>
                 </Container>
