@@ -1,5 +1,7 @@
 import GetLayoutWeb from "../layouts/layoutWeb";
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
+import { useUserLogin } from "../services/users.service";
+import { useRouter } from "next/router";
 
 import {
     Container,
@@ -53,6 +55,13 @@ const Feature = ({ text, icon, iconBg }: FeatureProps) => {
 
 export default function Features() {
 
+    const router = useRouter();
+    const { isLogin, siteRedirect } = useUserLogin();
+
+    useEffect(() => {
+        if (isLogin) router.push(siteRedirect);
+    }, [isLogin, router, siteRedirect]);
+
 
     return (
 
@@ -96,7 +105,7 @@ export default function Features() {
                             iconBg={useColorModeValue('purple.100', 'purple.900')}
                             text={'User-based product decisions'}
                         />
-                        
+
                     </Stack>
                 </Stack>
                 <Flex>
