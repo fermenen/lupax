@@ -46,7 +46,7 @@ def edit_studie_publish(studie_id: str, item: schemas.StudiesTasksEdit, db: Sess
     return True
 
 @router.patch("/publish/{studie_id}/", response_model=schemas.StudiesDetail, include_in_schema=False)
-def edit_studie_publish(studie_id: str, item: schemas.StudiesPublishEdit, db: Session = Depends(get_db), session: SessionContainer = Depends(verify_session())):
+def edit_studie(studie_id: str, item: schemas.StudiesPublishEdit, db: Session = Depends(get_db), session: SessionContainer = Depends(verify_session())):
     user_lupax = crud.get_user_of_supertokens(db, session.user_id)
     db_studie = crud.get_studie(db, studie_id=studie_id, user_id=user_lupax.id)
     if db_studie is None:

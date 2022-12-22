@@ -44,11 +44,10 @@ async def create_association(item: schemas.AssociationUserTeamCreate, db: Sessio
         db=db, user_id=user_to_add.id, team_id=team.id)
     if is_user_in_team_already:
         raise HTTPException(status_code=200, detail="User already in team")
-    association = crud.create_association(
-        db=db, user_id=user_to_add.id, team_id=team.id)
+    crud.create_association(db=db, user_id=user_to_add.id, team_id=team.id)
     crud.add_notification(db=db, type='team', user_id=user_to_add.id, text="{} ({}) has added you to the team '{}'.".format(
         user_lupax.name, user_lupax.email, team.name.upper()))
-    return association
+    return True
 
 
 @router.post('/team/{team_id}/leave/', include_in_schema=False)
