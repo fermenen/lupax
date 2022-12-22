@@ -62,7 +62,7 @@ async def leave_team(team_id: str, db: Session = Depends(get_db), session: Sessi
 
 
 @router.post('/team/{team_id}/delete/user/', include_in_schema=False)
-async def leave_team(team_id: str, item: schemas.DeleteUser, db: Session = Depends(get_db), session: SessionContainer = Depends(verify_session())):
+async def delete_user_of_team(team_id: str, item: schemas.DeleteUser, db: Session = Depends(get_db), session: SessionContainer = Depends(verify_session())):
     user_lupax = crud.get_user_of_supertokens(db, session.user_id)
     db_team = crud.get_team(db=db, team_id=team_id)
     if db_team.admin_user_id != user_lupax.id:

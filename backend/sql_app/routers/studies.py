@@ -56,7 +56,7 @@ def edit_studie_publish(studie_id: str, item: schemas.StudiesPublishEdit, db: Se
 
 
 @router.get("/studie/public/{studie_id}/", response_model=schemas.StudiePublic, include_in_schema=False)
-def get_studie(studie_id: str, db: Session = Depends(get_db)):
+def get_studie_public(studie_id: str, db: Session = Depends(get_db)):
     db_studie = crud.get_studie_public(db, studie_id=studie_id)
     if db_studie is None:
         raise HTTPException(status_code=404, detail="Studie not found")
@@ -64,7 +64,7 @@ def get_studie(studie_id: str, db: Session = Depends(get_db)):
 
 
 @router.get("/available/{studie_id}/", response_model=schemas.StudiesCan, tags=["Public API lupax"])
-def get_studie(studie_id: str, db: Session = Depends(get_db)):
+def get_studie_public_can(studie_id: str, db: Session = Depends(get_db)):
     db_studie = crud.get_studie_public(db, studie_id=studie_id)
     if db_studie is None:
         raise HTTPException(status_code=404, detail="Studie not found")
