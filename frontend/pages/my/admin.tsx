@@ -7,7 +7,7 @@ import { CardIcon } from "../../components/card";
 import { getLayoutDashboard } from "../../layouts/layoutDashboard"
 import { errorAlert, successAlert } from "../../services/alert.service";
 import { useMetrics, useUsersAll } from "../../services/admin.service";
-import { FiUsers, FiTrendingUp } from "react-icons/fi";
+import { FiUsers, FiTrendingUp, FiBell } from "react-icons/fi";
 import { DeleteIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useSWRConfig } from 'swr';
 import { format } from 'date-fns';
@@ -43,28 +43,6 @@ export default function Admin() {
     const url_api_all_users = `${process.env.NEXT_PUBLIC_URL_BASE_API}/admin/users/`;
 
 
-
-    const handleDeleteUser = (user_id_supertokens: string) => {
-        const data = {
-            user_id: user_id_supertokens
-        }
-        fetch(url_api_delete_user, {
-            method: 'POST',
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(data)
-        }).then(function (res) {
-            if (!res.ok) throw Error(res.statusText);
-            return res;
-        }).then(function (data) {
-            mutate(url_api_all_users)
-            successAlert("", "User deleted successfully")
-        }).catch(error => {
-            errorAlert("User delete error", error.toString());
-        }).finally(() => {
-
-        })
-    };
-
     if (isErrorUsers || isErrorMetrics) return <>Error</>
     if (isLoadingUser || isLoadingMetrics) return <Loading />
 
@@ -74,13 +52,11 @@ export default function Admin() {
                 <BarPage title="Admin" />
                 <VStack
                     spacing={6}
-                    align='stretch'>
-                    <CardIcon title={'Metrics'} icon={FiTrendingUp}>
-                        <Metrics />
-                    </CardIcon>
-                    <CardIcon title={'Users'} icon={FiUsers}>
-                        <TableUsers />
-                    </CardIcon>
+                    align='stretch'
+                >
+                    <Metrics />
+                    <TableUsers />
+                    <NotificationsAdmin />
                 </VStack>
             </Main>
         </>
@@ -88,52 +64,77 @@ export default function Admin() {
 
     function Metrics() {
         return (
-            <Container py={5} maxW={'container.lg'}>
-                <Grid
-                    templateColumns={{
-                        base: 'repeat(1, 1fr)',
-                        sm: 'repeat(2, 1fr)',
-                        md: 'repeat(3, 1fr)',
-                    }}
-                    gap={6}>
-                    <GridItem w="100%">
-                        <Flex flexDirection={'column'}>
-                            <Text fontSize={'4xl'} fontWeight={'bold'}>
-                                {metrics.count_users}
-                            </Text>
-                            <Box fontSize={'sm'}>
-                                Users lupax (only user role).
-                            </Box>
-                        </Flex>
-                    </GridItem>
-                    <GridItem w="100%">
-                        <Flex flexDirection={'column'}>
-                            <Text fontSize={'4xl'} fontWeight={'bold'}>
-                                {metrics.count_studies_teams}
-                            </Text>
-                            <Box fontSize={'sm'}>
-                                Studies of teams of user with user role.
-                            </Box>
-                        </Flex>
-                    </GridItem>
-                    <GridItem w="100%">
-                        <Flex flexDirection={'column'}>
-                            <Text fontSize={'4xl'} fontWeight={'bold'}>
-                                {metrics.count_studies_user}
-                            </Text>
-                            <Box fontSize={'sm'}>
-                                Studies only user with user role.
-                            </Box>
-                        </Flex>
-                    </GridItem>
-                </Grid>
-            </Container>
+            <CardIcon title={'Metrics'} icon={FiTrendingUp}>
+                <Container py={5} maxW={'container.lg'}>
+                    <Grid
+                        templateColumns={{
+                            base: 'repeat(1, 1fr)',
+                            sm: 'repeat(2, 1fr)',
+                            md: 'repeat(3, 1fr)',
+                        }}
+                        gap={6}>
+                        <GridItem w="100%">
+                            <Flex flexDirection={'column'}>
+                                <Text fontSize={'4xl'} fontWeight={'bold'}>
+                                    {metrics.count_users}
+                                </Text>
+                                <Box fontSize={'sm'}>
+                                    Users lupax (only user role).
+                                </Box>
+                            </Flex>
+                        </GridItem>
+                        <GridItem w="100%">
+                            <Flex flexDirection={'column'}>
+                                <Text fontSize={'4xl'} fontWeight={'bold'}>
+                                    {metrics.count_studies_teams}
+                                </Text>
+                                <Box fontSize={'sm'}>
+                                    Studies of teams of user with user role.
+                                </Box>
+                            </Flex>
+                        </GridItem>
+                        <GridItem w="100%">
+                            <Flex flexDirection={'column'}>
+                                <Text fontSize={'4xl'} fontWeight={'bold'}>
+                                    {metrics.count_studies_user}
+                                </Text>
+                                <Box fontSize={'sm'}>
+                                    Studies only user with user role.
+                                </Box>
+                            </Flex>
+                        </GridItem>
+                    </Grid>
+                </Container>
+            </CardIcon>
         )
     }
 
     function TableUsers() {
 
         function dataf() {
+
+            const handleDeleteUser = (user_id_supertokens: string) => {
+                const data = {
+                    user_id: user_id_supertokens
+                }
+                fetch(url_api_delete_user, {
+                    method: 'POST',
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify(data)
+                }).then(function (res) {
+                    if (!res.ok) throw Error(res.statusText);
+                    return res;
+                }).then(function (data) {
+                    mutate(url_api_all_users)
+                    successAlert("", "User deleted successfully")
+                }).catch(error => {
+                    errorAlert("User delete error", error.toString());
+                }).finally(() => {
+
+                })
+            };
+
+
             return users.users.map((user: UserResponse) => {
 
                 return {
@@ -203,9 +204,22 @@ export default function Admin() {
         )
 
         return (
-            <TableReact data={data} columns={columns} renderRowSubComponent={renderRowSubComponent} />
+            <CardIcon title={'Users'} icon={FiUsers}>
+                <TableReact data={data} columns={columns} renderRowSubComponent={renderRowSubComponent} />
+            </CardIcon>
         )
     }
+
+
+
+    function NotificationsAdmin() {
+
+        return (
+            <CardIcon title={'Notifications'} icon={FiBell}>
+
+            </CardIcon>
+
+        )
+    }
+
 }
-
-

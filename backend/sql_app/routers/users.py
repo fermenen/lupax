@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from supertokens_python.recipe.session import SessionContainer
 from supertokens_python.recipe.session.framework.fastapi import verify_session
@@ -43,7 +43,6 @@ def change_password(item: schemas.PasswordChange, db: Session = Depends(get_db),
         users_info.email, item.old_password)
 
     if isinstance(isPasswordValid, EmailPasswordSignInWrongCredentialsError):
-        # TODO: handle incorrect password error
-        return
+        raise HTTPException(status_code=400, detail="password not correct")
 
     return update_email_or_password(user_id, password=item.new_password)
