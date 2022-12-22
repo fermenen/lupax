@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import React from 'react';
 import FailedToLoad from '../../components/failedToLoad';
 import Main from '../../components/main';
 import BarPage from '../../components/barPage';
@@ -96,7 +95,6 @@ function CardAccount({ user, mutate }: { user: User, mutate: Function }) {
     const router = useRouter();
     const key_url_api_me = `${process.env.NEXT_PUBLIC_URL_BASE_API}/me/`;
 
-    const firstField = React.useRef();
     const [showPassword1, setShowPassword1] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
 
@@ -191,7 +189,7 @@ function CardAccount({ user, mutate }: { user: User, mutate: Function }) {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-            <Modal isOpen={isOpenModalPassword} onClose={onCloseModalPassword} initialFocusRef={firstField}>
+            <Modal isOpen={isOpenModalPassword} onClose={onCloseModalPassword}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Change password</ModalHeader>
@@ -211,7 +209,7 @@ function CardAccount({ user, mutate }: { user: User, mutate: Function }) {
                                             <FormControl isInvalid={form.errors.old_password && form.touched.old_password} mb={4}>
                                                 <FormLabel htmlFor='old_password'>Old password</FormLabel>
                                                 <InputGroup>
-                                                    <Input {...field} id='old_password' ref={firstField} type={showPassword1 ? 'text' : 'password'} />
+                                                    <Input {...field} id='old_password' type={showPassword1 ? 'text' : 'password'} />
                                                     <InputRightElement h={'full'}>
                                                         <Button
                                                             variant={'ghost'}
