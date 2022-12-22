@@ -1,10 +1,9 @@
 import Script from 'next/script';
 import NextLink from "next/link";
 import Head from 'next/head';
-import splitbee from '@splitbee/web';
 import EmailPasswordAuthNoSSR from './ProtectingRoute';
-import type { ReactElement } from 'react'
 import React, { ReactNode } from 'react';
+import type { ReactElement } from 'react'
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
 import { useRouter } from 'next/router';
@@ -13,7 +12,7 @@ import { Logo } from "../components/svg/logo";
 import { LogoIcon } from "../components/svg/logoIcon";
 import { myColors } from '../theme/theme';
 import { useSWRConfig } from 'swr';
-import { useUser } from '../services/users.service';
+import { useUser, LogoutUser } from '../services/users.service';
 import { filterNotifications, useNotifications } from '../services/notifications.service';
 
 import {
@@ -306,29 +305,18 @@ function NavLink({ icon, href, color_hover = 'gray.800', text, ...rest }: NavLin
 
 function Logout({ children }: { children: ReactElement }) {
 
-  const { mutate } = useSWRConfig()
-  const key_url_api_me = `${process.env.NEXT_PUBLIC_URL_BASE_API}/me/`
+  const key_url_api_me = `${process.env.NEXT_PUBLIC_URL_BASE_API}/me/`;
   const router = useRouter();
+  const { mutate } = useSWRConfig();
 
-  function handelLogout() {
-    fetch(`${process.env.NEXT_PUBLIC_URL_BASE_API}/api/auth/signout`, {
-      method: 'POST',
-      body: JSON.stringify({})
-    }).then(function (res) {
-      if (!res.ok) throw Error(res.statusText);
-      return res;
-    }).then(reponse => reponse.json()).then(data => {
-      if (data.status === "OK") {
-        splitbee.reset()
-        mutate(key_url_api_me)
-        router.push('/').then(() => {
-          successAlert('', 'Successful logout');
-        })
-      }
-    }).catch(error => {
-      console.error(error)
+  async function handelLogout() {
+  
+    if (await LogoutUser() == true) {
+      mutate(key_url_api_me)
+      router.push('/').then(() => {
+        successAlert('', 'Successful logout');
+      })
     }
-    );
   }
 
   return (

@@ -1,6 +1,6 @@
-from cgitb import text
-from typing import List
 from sqlalchemy.orm import Session
+from supertokens_python.syncio import delete_user
+from supertokens_python.recipe.session.syncio import revoke_all_sessions_for_user
 from .database import SessionLocal
 from . import models, schemas
 
@@ -205,6 +205,21 @@ def edit_preferences(db: Session, item: schemas.PreferencesEdit, user_id: int):
         models.Preferences.id == db_user_me.preferences_id).update(item.dict())
     db.commit()
     return
+
+
+def delete_account(db: Session, supertokens_user_id: int):
+    try:
+        user_lupax = get_user_of_supertokens(db, supertokens_user_id)
+        db.query(models.Notifications).filter(models.Notifications.user_id == user_lupax.id).delete()
+        db.query(models.Users).filter(models.Users.id_supertokens == supertokens_user_id).delete()
+    except Exception as err:
+        db.rollback()
+        raise err
+    else:
+        db.commit()
+        revoke_all_sessions_for_user(supertokens_user_id)
+        delete_user(supertokens_user_id)
+
 
 
 # %% STORAGE
