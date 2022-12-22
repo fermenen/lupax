@@ -158,7 +158,7 @@ export default function GetLayoutWeb(page: ReactElement) {
                         <Stack align={'flex-start'}>
                             <ListHeader>Support</ListHeader>
                             <Link href={'https://status.lupax.app/'}>Status</Link>
-                            <Link href={'mailto:hello@lupax.app'}>hello@lupax.app</Link>
+                            <Link href={'mailto:hello@lupax.app'}>Contact</Link>
                         </Stack>
                         <Stack align={'flex-start'}>
                             <ListHeader>Legal</ListHeader>
