@@ -1,7 +1,7 @@
 import Session from 'supertokens-auth-react/recipe/session';
 import useSWRImmutable from 'swr/immutable';
+import splitbee from '@splitbee/web';
 import { useState, useEffect } from "react";
-
 
 const fetcher = async (
     input: RequestInfo,
@@ -12,11 +12,9 @@ const fetcher = async (
     return res.json();
 };
 
-
+const key_url_api_me = `${process.env.NEXT_PUBLIC_URL_BASE_API}/me/`;
 
 export function useUser() {
-
-    const key_url_api_me = `${process.env.NEXT_PUBLIC_URL_BASE_API}/me/`
     const { data, error, mutate } = useSWRImmutable(key_url_api_me, fetcher)
 
     return {
@@ -27,7 +25,6 @@ export function useUser() {
     }
 
 }
-
 
 
 export function useUserLogin() {
@@ -49,3 +46,15 @@ export function useUserLogin() {
     return { isLogin, isCodeExecuted, siteRedirect };
 }
 
+export async function LogoutUser(): Promise<boolean> {
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_BASE_API}/api/auth/signout`, { method: 'POST' });
+    const data = await response.json();
+    if (data.status === "OK") {
+        splitbee.reset()
+        return true;
+    } else {
+        return false;
+    }
+
+}

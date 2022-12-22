@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import NextLink from "next/link";
-
 import React, { ReactNode } from 'react';
-import { FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { ChevronDownIcon, ChevronRightIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { ChevronDownIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { FiHome } from 'react-icons/fi';
 import { Logo } from '../components/svg/logo';
 import { useUserLogin } from '../services/users.service';
@@ -28,9 +27,6 @@ import {
     LinkOverlay,
     Show,
     useDisclosure,
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
     Link
 } from '@chakra-ui/react';
 
@@ -61,6 +57,7 @@ export default function GetLayoutWeb(page: ReactElement) {
             </Box>
         </ChakraProvider>
     )
+
     function NavbarWeb() {
         const { isOpen, onToggle } = useDisclosure();
         const { isLogin, siteRedirect } = useUserLogin();
@@ -94,7 +91,7 @@ export default function GetLayoutWeb(page: ReactElement) {
                         <NextLink href='/' passHref>
                             <Link><Logo /></Link>
                         </NextLink>
-                        <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+                        <Flex display={{ base: 'none', md: 'flex' }} ml={16}>
                             <DesktopNav />
                         </Flex>
                     </Flex>
@@ -108,7 +105,7 @@ export default function GetLayoutWeb(page: ReactElement) {
                                 <NextLink href='/auth/login' passHref>
                                     <Button
                                         as={'a'}
-                                        fontSize={'sm'}
+                                        fontSize={'md'}
                                         fontWeight={400}
                                         variant={'link'}>
                                         Sign In
@@ -155,18 +152,21 @@ export default function GetLayoutWeb(page: ReactElement) {
                 pos="absolute"
                 bottom="0"
                 width="100%"
-                height={heightFooter}
-            >
+                height={heightFooter}>
                 <Container as={Stack} maxW={'6xl'} py={10}>
                     <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
                         <Stack align={'flex-start'}>
                             <ListHeader>Support</ListHeader>
                             <Link href={'https://status.lupax.app/'}>Status</Link>
-                            <Link href={'mailto:hello@lupax.app'}>hello@lupax.app</Link>
+                            <Link href={'mailto:hello@lupax.app'}>Contact</Link>
                         </Stack>
                         <Stack align={'flex-start'}>
                             <ListHeader>Legal</ListHeader>
                             <Link href={'/privacy'}>Privacy Policy</Link>
+                        </Stack>
+                        <Stack align={'flex-start'}>
+                            <ListHeader>Developers</ListHeader>
+                            <Link href={`${process.env.NEXT_PUBLIC_URL_BASE_API}/documentation/`}>API References</Link>
                         </Stack>
                     </SimpleGrid>
                 </Container>
@@ -187,6 +187,9 @@ export default function GetLayoutWeb(page: ReactElement) {
                             &copy; {new Date().getFullYear()} lupax. All rights reserved.
                         </Text>
                         <Stack direction={'row'} spacing={6}>
+                            <SocialButton label={'GitHub'} href={'https://github.com/fermenen/lupax'}>
+                                <FaGithub />
+                            </SocialButton>
                             <SocialButton label={'Twitter'} href={'https://www.twitter.com/lupax_app/'}>
                                 <FaTwitter />
                             </SocialButton>
@@ -204,7 +207,7 @@ export default function GetLayoutWeb(page: ReactElement) {
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
     return (
-        <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
+        <Text fontWeight={'bold'} fontSize={'lg'} mb={2}>
             {children}
         </Text>
     );
@@ -241,87 +244,36 @@ const SocialButton = ({
     );
 };
 
+const NAV_ITEMS: Array<NavItem> = [
+    {
+        label: 'Features',
+        href: '/features',
+    },
+    {
+        label: 'Pricing',
+        href: '/pricing',
+    },
+];
 
 const DesktopNav = () => {
-    const linkColor = useColorModeValue('gray.600', 'gray.200');
-    const linkHoverColor = useColorModeValue('gray.800', 'white');
-    const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
     return (
-        <Stack direction={'row'} spacing={4}>
+        <Stack direction={'row'} spacing={5}>
             {NAV_ITEMS.map((navItem) => (
-                <Box key={navItem.label}>
-                    <Popover trigger={'hover'} placement={'bottom-start'}>
-                        <PopoverTrigger>
-                            <Link
-                                p={2}
-                                href={navItem.href ?? '#'}
-                                fontSize={'sm'}
-                                fontWeight={500}
-                                color={linkColor}
-                                _hover={{
-                                    textDecoration: 'none',
-                                    color: linkHoverColor,
-                                }}>
-                                {navItem.label}
-                            </Link>
-                        </PopoverTrigger>
-
-                        {navItem.children && (
-                            <PopoverContent
-                                border={0}
-                                boxShadow={'xl'}
-                                bg={popoverContentBgColor}
-                                p={4}
-                                rounded={'xl'}
-                                minW={'sm'}>
-                                <Stack>
-                                    {navItem.children.map((child) => (
-                                        <DesktopSubNav key={child.label} {...child} />
-                                    ))}
-                                </Stack>
-                            </PopoverContent>
-                        )}
-                    </Popover>
-                </Box>
+                <NextLink  key={navItem.label} href={navItem.href ?? '#'} passHref>
+                    <Button
+                        as={'a'}
+                        fontSize={'lg'}
+                        fontWeight={500}
+                        variant={'link'}>
+                        {navItem.label}
+                    </Button>
+                </NextLink>
             ))}
         </Stack>
     );
 };
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
-    return (
-        <Link
-            href={href}
-            role={'group'}
-            display={'block'}
-            p={2}
-            rounded={'md'}
-            _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
-            <Stack direction={'row'} align={'center'}>
-                <Box>
-                    <Text
-                        transition={'all .3s ease'}
-                        _groupHover={{ color: 'pink.400' }}
-                        fontWeight={500}>
-                        {label}
-                    </Text>
-                    <Text fontSize={'sm'}>{subLabel}</Text>
-                </Box>
-                <Flex
-                    transition={'all .3s ease'}
-                    transform={'translateX(-10px)'}
-                    opacity={0}
-                    _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-                    justify={'flex-end'}
-                    align={'center'}
-                    flex={1}>
-                    <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
-                </Flex>
-            </Stack>
-        </Link>
-    );
-};
 
 const MobileNav = () => {
     return (
@@ -393,45 +345,3 @@ interface NavItem {
     href?: string;
 }
 
-const NAV_ITEMS: Array<NavItem> = [];
-
-// const NAV_ITEMS: Array<NavItem> = [
-//     {
-//         label: 'Inspiration',
-//         children: [
-//             {
-//                 label: 'Explore Design Work',
-//                 subLabel: 'Trending Design to inspire you',
-//                 href: '#',
-//             },
-//             {
-//                 label: 'New & Noteworthy',
-//                 subLabel: 'Up-and-coming Designers',
-//                 href: '#',
-//             },
-//         ],
-//     },
-//     {
-//         label: 'Find Work',
-//         children: [
-//             {
-//                 label: 'Job Board',
-//                 subLabel: 'Find your dream design job',
-//                 href: '#',
-//             },
-//             {
-//                 label: 'Freelance Projects',
-//                 subLabel: 'An exclusive list for contract work',
-//                 href: '#',
-//             },
-//         ],
-//     },
-//     {
-//         label: 'Learn Design',
-//         href: '#',
-//     },
-//     {
-//         label: 'Hire Designers',
-//         href: '#',
-//     },
-// ];
