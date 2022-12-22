@@ -11,7 +11,6 @@ from supertokens_python.recipe.thirdpartyemailpassword import Google
 from supertokens_python.recipe.thirdpartyemailpassword.interfaces import APIInterface, ThirdPartyAPIOptions, ThirdPartySignInUpPostOkResult, EmailPasswordAPIOptions, EmailPasswordSignUpPostOkResult, EmailPasswordSignUpPostEmailAlreadyExistsError
 from supertokens_python.recipe.thirdparty.provider import Provider
 from supertokens_python.recipe.emailpassword import InputFormField
-from supertokens_python.recipe.emailpassword.interfaces import APIInterface
 from supertokens_python.recipe.emailpassword.types import FormField
 
 from .routers import studies, users, teams, tasks, participation, admin, storage, notifications
