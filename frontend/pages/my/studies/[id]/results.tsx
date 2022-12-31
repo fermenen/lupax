@@ -50,7 +50,7 @@ export default function Results() {
         return ["studie", "typeform"].includes(task.type);
     };
 
-    if (isError) return FailedToLoad("failed to load")
+    if (isError) return FailedToLoad("Error loading content, refresh page.")
 
     if (!isLoading && studie.number_tasks == 3) return (
         <>

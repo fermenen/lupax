@@ -57,7 +57,7 @@ export default function Settings() {
 
     const { user, isLoading, isError, mutate } = useUser();
 
-    if (isError) return FailedToLoad("failed to load")
+    if (isError) return FailedToLoad("Error loading content, refresh page.")
 
     return (
         <Main>

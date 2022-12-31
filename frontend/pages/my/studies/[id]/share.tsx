@@ -53,7 +53,7 @@ export default function Share() {
         }
     }
 
-    if (isError) return FailedToLoad("failed to load")
+    if (isError) return FailedToLoad("Error loading content, refresh page.")
 
     return (
         <>

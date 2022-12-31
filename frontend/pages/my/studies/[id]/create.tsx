@@ -49,7 +49,7 @@ export default function Create() {
     const { id } = router.query;
     const { studie, isLoading, isError, mutate } = useStudie(id);
 
-    if (isError) return FailedToLoad("failed to load")
+    if (isError) return FailedToLoad("Error loading content, refresh page.")
 
 
     const SortableItem = SortableElement(({ value }: { value: Task }) => (

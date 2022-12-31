@@ -29,7 +29,7 @@ export default function Overview() {
     const { id } = router.query;
     const { studie, isLoading, isError } = useStudie(id)
 
-    if (isError) return FailedToLoad("failed to load")
+    if (isError) return FailedToLoad("Error loading content, refresh page.")
 
     return (
         <>

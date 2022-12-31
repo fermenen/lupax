@@ -38,7 +38,7 @@ export default function Studies() {
 
     const { studies, isLoading, isError } = useStudies();
 
-    if (isError) return FailedToLoad("failed to load")
+    if (isError) return FailedToLoad("Error loading content, refresh page.")
     if (isLoading) return (<Loading />)
 
     if (studies.length == 0) {

@@ -22,7 +22,7 @@ export default function Dashboard() {
     const isError = isErrorUser || isErrorNotifications
     const isLoading = isLoadingUser || isLoadingNotifications
 
-    if (isError) return FailedToLoad("failed to load")
+    if (isError) return FailedToLoad("Error loading content, refresh page.")
 
     function handleMarkSeenNotification(id_n: string) {
 
