@@ -247,6 +247,12 @@ def link_video_participation(db: Session, id_video: str, id_participation: str):
 # %% Notifications
 
 
+def create_notification(db: Session, item: schemas.PreferencesEdit):
+    for user in db.query(models.Users).all():
+        add_notification(db, type=item.type, text=item.text, user_id=user.id)
+    return
+
+
 def add_notification(db: Session, type: str, text: str, user_id: int):
     db_notification = models.Notifications(
         text=text, type=type, user_id=user_id)

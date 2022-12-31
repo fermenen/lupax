@@ -67,10 +67,11 @@ class TaskEdit(BaseModel):
     id: str
     index: int
 
+
 class TaskEditDescription(BaseModel):
     welcome_message: Optional[str]
     farewell_message: Optional[str]
-    
+
 
 class TaskPublic(Task):
     index: int
@@ -160,24 +161,27 @@ class StudiesTasksEdit(StudiesEdit):
 #  Preferences #
 ################
 
+
 class PreferencesBase(BaseModel):
     team_alerts: bool
     tips_alerts: bool
 
     class Config:
-            orm_mode = True
+        orm_mode = True
 
 
 class Preferences(PreferencesBase):
     pass
 
+
 class PreferencesEdit(BaseModel):
-     team_alerts: Optional[bool]
-     tips_alerts: Optional[bool]
+    team_alerts: Optional[bool]
+    tips_alerts: Optional[bool]
 
 ##########
 # USERS  #
 ##########
+
 
 class UserBase(BaseModel):
     name: Optional[str]
@@ -189,7 +193,7 @@ class User(UserBase):
     id: Optional[str]
     role: str
     profile_picture: Optional[str]
-    preferences : Optional[Preferences]
+    preferences: Optional[Preferences]
 
     class Config:
         orm_mode = True
@@ -201,6 +205,7 @@ class UserWithoutRole(UserBase):
 
     class Config:
         orm_mode = True
+
 
 class PasswordChange(BaseModel):
     old_password: str
@@ -250,15 +255,22 @@ class AssociationUserTeamCreate(AssociationUserTeam):
         orm_mode = True
 
 
-# ADMIN
+#######################
+#       ADMIN       #
+#######################
 
 class DeleteUser(BaseModel):
     user_id: str
 
 
+class CreateNotification(BaseModel):
+    text: str
+    type: str
+
 #######################
 #       Storage       #
 #######################
+
 
 class StorageBase(BaseModel):
     pass

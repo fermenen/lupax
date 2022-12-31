@@ -53,3 +53,12 @@ def delete_user_lupax_supertokens(item: schemas.DeleteUser, db: Session = Depend
         return crud.delete_account(db, supertokens_user_id=item.user_id)
     else:
         raise HTTPException(status_code=404)
+
+
+@router.post("/create_notification/", include_in_schema=False)
+def create_notification(item: schemas.CreateNotification, db: Session = Depends(get_db), session: SessionContainer = Depends(verify_session())):
+    user_lupax = crud.get_user_of_supertokens(db, session.user_id)
+    if user_lupax and user_lupax.role == 'admin':
+        return crud.create_notification(db, item)
+    else:
+        raise HTTPException(status_code=404)

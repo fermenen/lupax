@@ -11,7 +11,6 @@ const fetcher = async (
 };
 
 
-
 export function useNotifications() {
 
     const url_api_notifications = `${process.env.NEXT_PUBLIC_URL_BASE_API}/notifications/`
@@ -27,14 +26,15 @@ export function useNotifications() {
 
 
 export function filterNotifications(user: User) {
-    if (user && user.preferences){
+    if (user && user.preferences) {
         return function filter(notification: { type: string; }) {
             const app = 'app'; // always app notifications
             const team = (user.preferences.team_alerts) ? 'team' : 'NO_TEAM';
-            return [app, team].includes(notification.type);
+            const tips_alerts = (user.preferences.tips_alerts) ? 'tips_alerts' : 'NO_TIPS_ALERTS';
+            return [app, team, tips_alerts].includes(notification.type);
         };
-    }else{
-        return () => {}
+    } else {
+        return () => { }
     }
 }
 
@@ -42,5 +42,3 @@ export function filterNotifications(user: User) {
 export function orderNotifications(n: { time_created: Date; }, n2: { time_created: Date; }) {
     return new Date(n2.time_created).getTime() - new Date(n.time_created).getTime();
 };
-
-

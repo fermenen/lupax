@@ -1,3 +1,4 @@
+import * as Yup from 'yup';
 import Loading from "../../components/loading";
 import Main from "../../components/main";
 import TableReact from "../../components/table";
@@ -11,6 +12,7 @@ import { FiUsers, FiTrendingUp, FiBell } from "react-icons/fi";
 import { DeleteIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useSWRConfig } from 'swr';
 import { format } from 'date-fns';
+import { Formik, Field, Form } from 'formik';
 
 import {
     Flex,
@@ -22,7 +24,20 @@ import {
     IconButton,
     VStack,
     UnorderedList,
-    ListItem
+    ListItem,
+    useDisclosure,
+    Button,
+    ModalOverlay,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    FormControl,
+    FormErrorMessage,
+    FormLabel,
+    Textarea
 } from '@chakra-ui/react'
 
 
@@ -214,11 +229,75 @@ export default function Admin() {
 
     function NotificationsAdmin() {
 
+        const { isOpen, onOpen, onClose } = useDisclosure();
+
+        const handleCreateAdvice = (values: any, actions: any) => {
+            const data = { text: values.text , type: 'tips_alerts'}
+            fetch(`${process.env.NEXT_PUBLIC_URL_BASE_API}/admin/create_notification/`, {
+                method: 'POST',
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(data)
+            }).then(function (res) {
+                if (!res.ok) throw Error(res.statusText);
+                return res;
+            }).then(function (data) {
+                onClose();
+                successAlert("", "Advice notification created successfully")
+            }).catch(error => {
+                errorAlert("Error creating notification", error.toString());
+            }).finally(() => {
+                actions.setSubmitting(false)
+            })
+        };
+        const adviceSchema = Yup.object().shape({
+            text: Yup.string()
+                .min(8, 'Too Short! (min 8 characters)')
+                .required('Required')
+        });
+
         return (
             <CardIcon title={'Notifications'} icon={FiBell}>
-
+                <>
+                    <Button onClick={onOpen}>
+                        Create advice notification
+                    </Button>
+                    <Modal isOpen={isOpen} onClose={onClose}>
+                        <ModalOverlay />
+                        <ModalContent>
+                            <ModalHeader>Create advice notification</ModalHeader>
+                            <ModalCloseButton />
+                            <Formik
+                                initialValues={{
+                                    text: "",
+                                }}
+                                validationSchema={adviceSchema}
+                                onSubmit={(values, actions) => { handleCreateAdvice(values, actions) }}>
+                                {(props) => (
+                                    <Form>
+                                        <ModalBody pb={6}>
+                                            <Field name='text'>
+                                                {({ field, form }: any) => (
+                                                    <FormControl isInvalid={form.errors.text && form.touched.text} mb={4}>
+                                                        <FormLabel htmlFor='text'>Notification</FormLabel>
+                                                        <Textarea {...field} id='text' resize={'none'} />
+                                                        <FormErrorMessage>{form.errors.text}</FormErrorMessage>
+                                                    </FormControl>
+                                                )}
+                                            </Field>
+                                        </ModalBody>
+                                        <ModalFooter>
+                                            <Button type="submit" isLoading={props.isSubmitting} colorScheme='green' mr={3}>
+                                                Create
+                                            </Button>
+                                            <Button onClick={onClose}>Cancel</Button>
+                                        </ModalFooter>
+                                    </Form>
+                                )}
+                            </Formik>
+                        </ModalContent>
+                    </Modal>
+                </>
             </CardIcon>
-
         )
     }
 
