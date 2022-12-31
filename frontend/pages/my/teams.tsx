@@ -53,7 +53,6 @@ export default function Team() {
 
     const isLoading = isLoadingTeams || isLoadingUser;
 
-
     const handleCreateAssociationTeam = (values: any, actions: any) => {
         const url_api_team_association = `${process.env.NEXT_PUBLIC_URL_BASE_API}/teams/association/`;
         const data = {
@@ -85,8 +84,8 @@ export default function Team() {
                 successAlert("", "Colleague added")
             }
         }).catch(error => {
-            console.error(error)
             errorAlert("Error add colleague", error.toString());
+            throw new Error(error.toString())
         }).finally(() => {
             actions.setSubmitting(false)
         })
@@ -94,7 +93,7 @@ export default function Team() {
 
     const leaveTeam = (team_id: string) => {
         const url_api_team_leave = `${process.env.NEXT_PUBLIC_URL_BASE_API}/team/${team_id}/leave/`;
-        
+
         fetch(url_api_team_leave, {
             method: 'POST',
             headers: { "content-type": "application/json" }
@@ -105,13 +104,13 @@ export default function Team() {
             mutate()
             successAlert("", "You have left the team correctly")
         }).catch(error => {
-            console.error(error)
             errorAlert("Error leave team", error.toString());
+            throw new Error(error.toString())
         })
     };
 
     const deleteUserTeam = (team_id: string, user_id: string) => {
-        const url_api_team_delete_user= `${process.env.NEXT_PUBLIC_URL_BASE_API}/team/${team_id}/delete/user/`;
+        const url_api_team_delete_user = `${process.env.NEXT_PUBLIC_URL_BASE_API}/team/${team_id}/delete/user/`;
         const data = {
             user_id: user_id,
         }
@@ -126,8 +125,8 @@ export default function Team() {
             mutate()
             successAlert("", "You have successfully removed the user from the team")
         }).catch(error => {
-            console.error(error)
             errorAlert("Error delete user team", error.toString());
+            throw new Error(error.toString())
         })
     };
 
@@ -204,7 +203,7 @@ export default function Team() {
                                                         }}
                                                             size='sm'
                                                             aria-label={'Remove user from the team'}
-                                                            onClick={() => {deleteUserTeam(team.id, userTeam.id)}}
+                                                            onClick={() => { deleteUserTeam(team.id, userTeam.id) }}
                                                             icon={<FiUserMinus />} />
                                                     </Tooltip>
                                                 </Flex>
@@ -256,4 +255,3 @@ export default function Team() {
         </Main>
     )
 }
-

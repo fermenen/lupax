@@ -79,22 +79,18 @@ function StepScreenTask(props: stepTask) {
 
 
     function FarewellPage() {
-
         return (
             <TextPageView text={props.task.farewell_message}></TextPageView>
         )
     }
 
-
     function WelcomePage() {
-
         return (
             <TextPageView text={props.task.welcome_message}>
                 <Button colorScheme='green' size='md' onClick={next}>Start study</Button>
             </TextPageView>
         )
     }
-
 
     function TypeFormPage() {
 
@@ -114,8 +110,8 @@ function StepScreenTask(props: stepTask) {
                 return res;
             }).then(reponse => reponse.json()).then(data => {
                 next();
-            }).catch(err => {
-                console.error(err);
+            }).catch(error => {
+                throw new Error(error.toString())
             }
             );
         }
@@ -125,7 +121,7 @@ function StepScreenTask(props: stepTask) {
                 id={props.task.typeform_id}
                 style={{ width: '100%', height: "90vh" }}
                 className="my-form"
-                onSubmit={postData}/>
+                onSubmit={postData} />
         )
     }
 
@@ -242,13 +238,12 @@ function StepScreenTask(props: stepTask) {
                     }).then(function (data) {
                     }).catch(error => {
                         errorAlert("Upload video error", error.toString());
+                        throw new Error(error.toString())
                     })
                 }
 
             }, false);
-
             xhr.send();
-
         }
 
 
@@ -327,7 +322,4 @@ function StepScreenTask(props: stepTask) {
 
 }
 
-
 export default StepScreenTask;
-
-
