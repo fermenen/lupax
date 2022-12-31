@@ -119,7 +119,7 @@ function CardAccount({ user, mutate }: { user: User, mutate: Function }) {
     };
 
     const handleChangePassword = (values: any, actions: any) => {
-        const data = { old_password: values.old_password,  new_password: values.new_password}
+        const data = { old_password: values.old_password, new_password: values.new_password }
         fetch(`${process.env.NEXT_PUBLIC_URL_BASE_API}/change_password/`, {
             method: 'POST',
             headers: { "content-type": "application/json" },
@@ -263,7 +263,6 @@ function CardAccount({ user, mutate }: { user: User, mutate: Function }) {
 }
 
 function Preferences() {
-
     return (
         <CardIcon title={'Preferences'} icon={FiSettings}>
             <FormControl>
@@ -282,12 +281,10 @@ function Preferences() {
 function Notifications({ user, mutate }: { user: User, mutate: Function }) {
 
     const handleditPreferences = (preference: string, value: boolean) => {
-
         const url_api_me_preferences = `${process.env.NEXT_PUBLIC_URL_BASE_API}/me/preferences/`;
         const data = {
             [preference]: value
         }
-
         fetch(url_api_me_preferences, {
             method: 'PATCH',
             headers: { "content-type": "application/json" },
@@ -326,8 +323,8 @@ function Notifications({ user, mutate }: { user: User, mutate: Function }) {
                     </FormLabel>
                     <Switch
                         id='tips_alerts'
-                        // value={user.preferences.tips_alerts.toString()}
-                        // isChecked={user.preferences.tips_alerts}
+                        value={user.preferences.tips_alerts.toString()}
+                        isChecked={user.preferences.tips_alerts}
                         colorScheme={'green'}
                         onChange={(event: ChangeEvent<HTMLInputElement>) => {
                             var actual_selected = (event.currentTarget.value.toLowerCase() === 'true');
@@ -341,7 +338,6 @@ function Notifications({ user, mutate }: { user: User, mutate: Function }) {
 }
 
 function LinksMore() {
-
     return (
         <Box>
             <HStack spacing='2' ml={2} mt={2}>

@@ -3,9 +3,9 @@ interface id {
     id: string
 }
 
-
-export interface Preferences{
+export interface Preferences {
     team_alerts: boolean
+    tips_alerts: boolean
 }
 
 export interface User extends id {

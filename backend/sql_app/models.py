@@ -48,6 +48,7 @@ class Preferences(Base):
     __tablename__ = "preferences"
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     team_alerts = Column(Boolean, default=True, nullable=False)
+    tips_alerts = Column(Boolean, default=True, nullable=False)
     user = relationship("Users", back_populates="preferences")
 
 

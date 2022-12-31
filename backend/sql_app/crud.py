@@ -157,11 +157,14 @@ def create_association(db: Session, user_id: int, team_id: int):
     else:
         raise Exception("User or Team not exist")
 
+
 def delete_association(db: Session, user_id: int, team_id: int):
-    new_associations = list(filter(lambda user: user.id != user_id, get_team(db=db, team_id=team_id).users))
+    new_associations = list(
+        filter(lambda user: user.id != user_id, get_team(db=db, team_id=team_id).users))
     get_team(db=db, team_id=team_id).users = new_associations
     db.commit()
     return
+
 
 def is_user_in_team(db: Session, user_id: int, team_id: int):
     user = db.query(models.Teams).join(models.Users, models.Teams.users).filter(
@@ -201,17 +204,21 @@ def create_user(user_supertokens: object, name: str, last_name: str, picture: st
 
 def edit_preferences(db: Session, item: schemas.PreferencesEdit, user_id: int):
     db_user_me = get_user_info(db=db, user_id_lupax=user_id)
-    me_preferences = db.query(models.Preferences).filter(
-        models.Preferences.id == db_user_me.preferences_id).update(item.dict())
+    item_changes = {
+        key: value for key, value in item.dict().items() if value is not None
+    }
+    db.query(models.Preferences).filter_by(
+        id=db_user_me.preferences_id).update(item_changes)
     db.commit()
-    return
 
 
 def delete_account(db: Session, supertokens_user_id: int):
     try:
         user_lupax = get_user_of_supertokens(db, supertokens_user_id)
-        db.query(models.Notifications).filter(models.Notifications.user_id == user_lupax.id).delete()
-        db.query(models.Users).filter(models.Users.id_supertokens == supertokens_user_id).delete()
+        db.query(models.Notifications).filter(
+            models.Notifications.user_id == user_lupax.id).delete()
+        db.query(models.Users).filter(
+            models.Users.id_supertokens == supertokens_user_id).delete()
     except Exception as err:
         db.rollback()
         raise err
@@ -219,7 +226,6 @@ def delete_account(db: Session, supertokens_user_id: int):
         db.commit()
         revoke_all_sessions_for_user(supertokens_user_id)
         delete_user(supertokens_user_id)
-
 
 
 # %% STORAGE

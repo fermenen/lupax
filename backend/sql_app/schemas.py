@@ -162,6 +162,7 @@ class StudiesTasksEdit(StudiesEdit):
 
 class PreferencesBase(BaseModel):
     team_alerts: bool
+    tips_alerts: bool
 
     class Config:
             orm_mode = True
@@ -172,7 +173,7 @@ class Preferences(PreferencesBase):
 
 class PreferencesEdit(BaseModel):
      team_alerts: Optional[bool]
-     
+     tips_alerts: Optional[bool]
 
 ##########
 # USERS  #
