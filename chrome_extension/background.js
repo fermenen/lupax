@@ -44,8 +44,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 
 chrome.runtime.onMessageExternal.addListener(async (request, sender, sendResponse) => {
-    // console.log("Received message from " + sender + ": ", request);
-        c_participant_user = await get_UUID()
+    console.log("Received message from " + sender + ": ", request);
+    c_participant_user = await get_UUID()
     if (request.type === 'FROM_LUPAX_START') {
         c_url_base_api = request.url_api;
         c_extension_id = request.extension_id;
@@ -84,7 +84,6 @@ async function start_studie_task(tab_id) {
 // STOP STUDIE TASK
 async function stop_studie_task(request) {
     console.log('%cSTOP STUDIE TASK ' + c_id_task + ' ON TABid ' + c_tab_id, 'color: red;');
-
     c_finish_time = performance.now();
     const time_total = c_finish_time - c_start_time;
     c_finish = true;
@@ -92,7 +91,7 @@ async function stop_studie_task(request) {
     try {
         chrome.tabs.remove(c_tab_id);
     } catch (error) {
-        console.info(error)
+        console.error(error)
     }
     if (!c_preview_mode) {
         const data_results = {
@@ -117,7 +116,6 @@ chrome.tabs.onUpdated.addListener(async function (tabId, info) {
     }
 
 });
-
 
 
 // UTILS
@@ -151,11 +149,9 @@ async function openTab(url) {
 }
 
 
-
 /// FETCH
 
 async function getDataTask(task_id) {
-
     return fetch(`${c_url_base_api}/task/${task_id}/`, {
         method: 'GET',
         headers: { "content-type": "application/json" },
@@ -166,12 +162,10 @@ async function getDataTask(task_id) {
             console.error(err);
         })
     });
-
 }
 
 
 function postDataTask(data_results) {
-
     fetch(`${c_url_base_api}/participation/`, {
         method: 'POST',
         headers: { "content-type": "application/json" },
@@ -185,5 +179,4 @@ function postDataTask(data_results) {
         console.error(err);
     }
     );
-
 }

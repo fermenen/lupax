@@ -1,8 +1,8 @@
 {
   "name": "lupax.",
   "description": "lupax extension",
-  "author": "lupax.app",
-  "version": "1.4.3",
+  "author": "www.lupax.app",
+  "version": "1.4.4",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js",
@@ -17,6 +17,7 @@
     "matches": [
       "*://localhost/*",
       "*://lupax.app/*",
+      "*://www.lupax.app/*",
       "*://develop.lupax.app/*"
     ]
   },
