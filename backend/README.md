@@ -47,6 +47,13 @@ alembic upgrade head
 
 ```
 
+For pass tests:
+
+```bash
+pytest
+
+```
+
 
 ## Resources
 
