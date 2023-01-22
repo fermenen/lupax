@@ -14,7 +14,7 @@ def test_ping():
 
 # PASSWORD TESTS
 
-def test_login_ok():
+def password_ok():
     response = client.post("api/auth/user/password/reset/token",
                            json={
                                "formFields": [
@@ -28,7 +28,7 @@ def test_login_ok():
     assert response.json()['status'] == "OK"
 
 
-def test_login_ko():
+def password_ko():
     response = client.post("api/auth/user/password/reset/token")
     assert response.status_code == 400
     assert response.json()[
