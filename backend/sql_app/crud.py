@@ -198,6 +198,9 @@ def create_user(user_supertokens: object, name: str, last_name: str, picture: st
         session.commit()
         session.refresh(db_user)
         session.refresh(db_preferences)
+    except Exception as error:
+        session.rollback()
+        raise error
     finally:
         session.close()
 
@@ -225,7 +228,11 @@ def delete_account(db: Session, supertokens_user_id: int):
     else:
         db.commit()
         revoke_all_sessions_for_user(supertokens_user_id)
-        delete_user(supertokens_user_id)
+        delete_user_in_supertokens(supertokens_user_id)
+
+def delete_user_in_supertokens(supertokens_user_id: int):
+    delete_user(supertokens_user_id)
+
 
 
 # %% STORAGE
