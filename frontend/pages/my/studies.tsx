@@ -52,7 +52,7 @@ export default function Studies() {
                                 Create a study
                             </Button>
                         </CreateStudie>
-                        <Text fontSize='xl' color="muted">and start measuring the usability of your sites easily</Text>
+                        <Text fontSize='xl' color="muted">and start measuring the usability of your sites easily.</Text>
                     </HStack>
                 </CenterInfo>
             </Main>

@@ -146,10 +146,10 @@ export default function Team() {
                     <HStack spacing="1" justify="center" alignItems={'baseline'}>
                         <CreateTeam>
                             <Button size='lg' variant="link" colorScheme="green">
-                                Add a team
+                                Create a team
                             </Button>
                         </CreateTeam>
-                        <Text fontSize='xl' color="muted">so you can create and edit studies together</Text>
+                        <Text fontSize='xl' color="muted">to collaborate with others.</Text>
                     </HStack>
                 </CenterInfo>
             </Main>
