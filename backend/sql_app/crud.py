@@ -184,8 +184,8 @@ def get_user_by_mail(db: Session, user_email: str):
 
 def create_user(user_supertokens: object, name: str, last_name: str, picture: str = ""):
 
-    session = SessionLocal()
     try:
+        session = SessionLocal()
         db_preferences = models.Preferences()
         session.add(db_preferences)
         session.commit()
