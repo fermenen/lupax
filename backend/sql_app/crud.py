@@ -182,7 +182,7 @@ def get_user_by_mail(db: Session, user_email: str):
     return db.query(models.Users).filter(models.Users.email == user_email).first()
 
 
-def create_user(user_supertokens: object, name: str, last_name: str, picture: str):
+def create_user(user_supertokens: object, name: str, last_name: str, picture: str = ""):
 
     session = SessionLocal()
     try:
@@ -200,7 +200,7 @@ def create_user(user_supertokens: object, name: str, last_name: str, picture: st
         session.refresh(db_preferences)
     except Exception as error:
         session.rollback()
-        raise error
+        delete_user_in_supertokens(supertokens_user_id=user_supertokens.user_id)
     finally:
         session.close()
 

@@ -50,10 +50,9 @@ def apis_override(original_implementation: APIInterface):
                 resp = requests.get('https://www.googleapis.com/oauth2/v2/userinfo?access_token={}&alt=json'.format(
                     thirdparty_auth_response["access_token"]))
                 data_google = resp.json()
-                try:
-                    crud.create_user(user_supertokens=response.user, name=data_google['given_name'], last_name=data_google['family_name'], picture=data_google['picture'])
-                except:
-                    crud.delete_user_in_supertokens(response.user.user_id)
+                
+                crud.create_user(user_supertokens=response.user, name=data_google['given_name'], last_name=data_google['family_name'], picture=data_google['picture'])
+
         return response
 
     async def emailpassword_sign_up_post(form_fields: List[FormField], api_options: EmailPasswordAPIOptions, user_context: Dict[str, Any]) -> Union[EmailPasswordSignUpPostOkResult, EmailPasswordSignUpPostEmailAlreadyExistsError]:
@@ -66,10 +65,7 @@ def apis_override(original_implementation: APIInterface):
                     name = field.value
                 elif field.id == 'last_name':
                     last_name = field.value
-            try:
-                crud.create_user(user_supertokens=response.user,name=name, last_name=last_name, picture='')
-            except:
-                crud.delete_user_in_supertokens(response.user.user_id)
+            crud.create_user(user_supertokens=response.user, name=name, last_name=last_name)
         return response
 
     original_implementation.thirdparty_sign_in_up_post = thirdparty_sign_in_up_post
