@@ -1,3 +1,4 @@
+import nest_asyncio
 from sqlalchemy.orm import Session
 from supertokens_python.syncio import delete_user
 from supertokens_python.recipe.session.syncio import revoke_all_sessions_for_user
@@ -200,7 +201,9 @@ def create_user(user_supertokens: object, name: str, last_name: str, picture: st
         session.refresh(db_preferences)
     except Exception as error:
         session.rollback()
+        nest_asyncio.apply()
         delete_user_in_supertokens(supertokens_user_id=user_supertokens.user_id)
+        raise error
     finally:
         session.close()
 

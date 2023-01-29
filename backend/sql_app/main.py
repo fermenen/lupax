@@ -50,7 +50,6 @@ def apis_override(original_implementation: APIInterface):
                 resp = requests.get('https://www.googleapis.com/oauth2/v2/userinfo?access_token={}&alt=json'.format(
                     thirdparty_auth_response["access_token"]))
                 data_google = resp.json()
-                
                 crud.create_user(user_supertokens=response.user, name=data_google['given_name'], last_name=data_google['family_name'], picture=data_google['picture'])
 
         return response

@@ -100,7 +100,8 @@ export default function Register(): JSX.Element {
                 }
             }
         }).catch(error => {
-            errorAlert('', error.toString());
+            errorAlert('Error registering', "Please try again. If the error persists, contact support.");
+            throw error;
         }).finally(() => {
             actions.setSubmitting(false)
         })

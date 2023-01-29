@@ -6,7 +6,6 @@ authors = ["Fernando Menéndez Menéndez <UO251800@uniovi.es>"]
 
 [tool.poetry.dependencies]
 
-
 python = "^3.9.5"
 fastapi = "^0.68.1"
 uvicorn = "^0.17.5"
@@ -21,7 +20,7 @@ google-cloud-storage = "^2.3.0"
 psycopg2-binary = "^2.9.5"
 httpx = "^0.23.3"
 pytest = "^7.2.1"
-
+nest-asyncio = "^1.5.6"
 
 
 [tool.poetry.dev-dependencies]
