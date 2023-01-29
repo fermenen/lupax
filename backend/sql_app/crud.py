@@ -1,8 +1,10 @@
 import nest_asyncio
+from retry import retry
 from sqlalchemy.orm import Session
 from supertokens_python.syncio import delete_user
 from supertokens_python.recipe.session.syncio import revoke_all_sessions_for_user
 from .database import SessionLocal
+from psycopg2 import OperationalError
 from . import models, schemas
 
 
@@ -183,8 +185,8 @@ def get_user_by_mail(db: Session, user_email: str):
     return db.query(models.Users).filter(models.Users.email == user_email).first()
 
 
+@retry(OperationalError, delay=2, tries=5)
 def create_user(user_supertokens: object, name: str, last_name: str, picture: str = ""):
-
     try:
         session = SessionLocal()
         db_preferences = models.Preferences()
