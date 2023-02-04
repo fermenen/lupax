@@ -131,11 +131,11 @@ app.include_router(admin.router)
 
 
 @app.get("/ping/", include_in_schema=False)
-def hello():
+def ping():
     return {"ping": "pong"}
 
 @app.get("/db/", include_in_schema=False)
-def hello():
+def db_test():
     t1 = datetime.datetime.now()
     sql.select([1])
     t2 = datetime.datetime.now()
