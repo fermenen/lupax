@@ -3,7 +3,9 @@ from sqlalchemy.orm import Session
 from supertokens_python.recipe.session import SessionContainer
 from supertokens_python.recipe.session.framework.fastapi import verify_session
 from supertokens_python.syncio import get_users_newest_first
-from .. import crud, schemas, models
+from ..services import crud
+from ..schemas import schemas
+from ..models import models
 from ..dependencies import get_db
 
 router = APIRouter(

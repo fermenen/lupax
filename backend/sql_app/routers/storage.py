@@ -1,12 +1,11 @@
 import os
 import base64
 import uuid
-from fastapi import APIRouter
-from typing import List
-from fastapi import Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from supertokens_python.recipe.session.framework.fastapi import verify_session
-from .. import crud, schemas
+from ..services import crud
+from ..schemas import schemas
 from ..dependencies import get_db
 from ..utils.storage import StorageCloud
 

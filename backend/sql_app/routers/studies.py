@@ -1,11 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, HTTPException
 from typing import List
-from .. import crud, schemas
-from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 from supertokens_python.recipe.session import SessionContainer
 from supertokens_python.recipe.session.framework.fastapi import verify_session
 from ..dependencies import get_db
+from ..services import crud
+from ..schemas import schemas
 
 
 router = APIRouter()

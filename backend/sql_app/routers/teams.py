@@ -4,7 +4,8 @@ from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 from supertokens_python.recipe.session import SessionContainer
 from supertokens_python.recipe.session.framework.fastapi import verify_session
-from .. import crud, schemas
+from ..services import crud
+from ..schemas import schemas
 from ..dependencies import get_db
 
 

@@ -4,8 +4,9 @@ from supertokens_python.recipe.session import SessionContainer
 from supertokens_python.recipe.session.framework.fastapi import verify_session
 from supertokens_python.recipe.thirdpartyemailpassword.syncio import get_user_by_id, emailpassword_sign_in, update_email_or_password
 from supertokens_python.recipe.thirdpartyemailpassword.interfaces import EmailPasswordSignInWrongCredentialsError
+from ..services import crud
 from ..dependencies import get_db
-from .. import crud, schemas
+from ..schemas import schemas
 
 
 router = APIRouter()

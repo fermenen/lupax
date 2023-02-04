@@ -3,9 +3,9 @@ import enum
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime, Table, Enum
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship, backref
-from .database import Base
-from .utils.gravatar import Gravatar
-from .utils.storage import StorageCloud
+from ..config.database import Base
+from ..utils.gravatar import Gravatar
+from ..utils.storage import StorageCloud
 
 association_users_teams = Table('associationUserTeam', Base.metadata,
                                 Column('user_id', ForeignKey(

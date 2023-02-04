@@ -112,8 +112,8 @@ def test_create_studie_ok():
     assert response.json()['name'] == "Estudio TEST python"
     assert response.json()['public_studie_title'] == "Estudio demo TEST"
     assert response.json()['audience_max'] == 50
-    assert response.json()['is_active'] == True
-    assert response.json()['is_published'] == False
+    assert response.json()['is_active'] is True
+    assert response.json()['is_published'] is False
 
 def test_create_studie_ko_no_data():
     response = client.post("/studies/")

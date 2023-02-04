@@ -171,7 +171,7 @@ class GravatarXMLRPC(object):
         response = self._call("exists", params={"hashes": hashes})
         results = {}
         for key, value in response.items():
-            results[key] = True if value else False
+            results[key] = bool(value)
         return results
 
     def addresses(self):

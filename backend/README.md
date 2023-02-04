@@ -50,7 +50,7 @@ alembic upgrade head
 For pass tests:
 
 ```bash
-pytest
+poetry run pytest
 
 ```
 

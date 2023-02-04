@@ -3,9 +3,10 @@ from retry import retry
 from sqlalchemy.orm import Session
 from supertokens_python.syncio import delete_user
 from supertokens_python.recipe.session.syncio import revoke_all_sessions_for_user
-from .database import SessionLocal
 from psycopg2 import OperationalError
-from . import models, schemas
+from ..schemas import schemas
+from ..models import models
+from ..config.database import SessionLocal
 
 
 def get_user_of_supertokens(db: Session, user_id_supertokens: int):
