@@ -16,7 +16,7 @@ from supertokens_python.recipe.emailpassword import InputFormField
 from supertokens_python.recipe.emailpassword.types import FormField
 
 from .routers import studies, users, teams, tasks, participation, admin, storage, notifications
-from .services import crud
+from .services import users_service
 from .models import models
 from .config.database import engine
 
@@ -53,7 +53,7 @@ def apis_override(original_implementation: APIInterface):
                 resp = requests.get('https://www.googleapis.com/oauth2/v2/userinfo?access_token={}&alt=json'.format(
                     thirdparty_auth_response["access_token"]))
                 data_google = resp.json()
-                crud.create_user(user_supertokens=response.user, name=data_google['given_name'], last_name=data_google['family_name'], picture=data_google['picture'])
+                users_service.create_user(user_supertokens=response.user, name=data_google['given_name'], last_name=data_google['family_name'], picture=data_google['picture'])
 
         return response
 
@@ -67,7 +67,7 @@ def apis_override(original_implementation: APIInterface):
                     name = field.value
                 elif field.id == 'last_name':
                     last_name = field.value
-            crud.create_user(user_supertokens=response.user, name=name, last_name=last_name)
+            users_service.create_user(user_supertokens=response.user, name=name, last_name=last_name)
         return response
 
     original_implementation.thirdparty_sign_in_up_post = thirdparty_sign_in_up_post

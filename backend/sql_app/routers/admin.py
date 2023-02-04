@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from supertokens_python.recipe.session import SessionContainer
 from supertokens_python.recipe.session.framework.fastapi import verify_session
 from supertokens_python.syncio import get_users_newest_first
-from ..services import crud
+from ..services import users_service, notifications_service
 from ..schemas import schemas
 from ..models import models
 from ..dependencies import get_db
@@ -16,7 +16,7 @@ router = APIRouter(
 
 @router.get("/metrics/", include_in_schema=False)
 def get_metrics(db: Session = Depends(get_db), session: SessionContainer = Depends(verify_session())):
-    user_lupax = crud.get_user_of_supertokens(db, session.user_id)
+    user_lupax = users_service.get_user_of_supertokens(db, session.user_id)
     if user_lupax and user_lupax.role == 'admin':
         count_users = db.query(models.Users).filter(
             models.Users.role == 'user').count()
@@ -36,12 +36,12 @@ def get_metrics(db: Session = Depends(get_db), session: SessionContainer = Depen
 
 @router.get("/users/", include_in_schema=False)
 def get_users(db: Session = Depends(get_db), session: SessionContainer = Depends(verify_session())):
-    user_lupax = crud.get_user_of_supertokens(db, session.user_id)
+    user_lupax = users_service.get_user_of_supertokens(db, session.user_id)
     if user_lupax and user_lupax.role == 'admin':
         users_response = get_users_newest_first()
         for index, user in enumerate(users_response.users):
             users_response.users[index] = {
-                'supertokens': user, "lupax": crud.get_user_of_supertokens(db, user.user_id)}
+                'supertokens': user, "lupax": users_service.get_user_of_supertokens(db, user.user_id)}
         return users_response
     else:
         raise HTTPException(status_code=404)
@@ -49,18 +49,18 @@ def get_users(db: Session = Depends(get_db), session: SessionContainer = Depends
 
 @router.post("/delete/user/", include_in_schema=False)
 def delete_user_lupax_supertokens(item: schemas.DeleteUser, db: Session = Depends(get_db), session: SessionContainer = Depends(verify_session())):
-    user_lupax = crud.get_user_of_supertokens(
+    user_lupax = users_service.get_user_of_supertokens(
         db=db, user_id_supertokens=session.user_id)
     if user_lupax and user_lupax.role == 'admin':
-        return crud.delete_account(db, supertokens_user_id=item.user_id)
+        return users_service.delete_account(db, supertokens_user_id=item.user_id)
     else:
         raise HTTPException(status_code=404)
 
 
 @router.post("/create_notification/", include_in_schema=False)
 def create_notification(item: schemas.CreateNotification, db: Session = Depends(get_db), session: SessionContainer = Depends(verify_session())):
-    user_lupax = crud.get_user_of_supertokens(db, session.user_id)
+    user_lupax = users_service.get_user_of_supertokens(db, session.user_id)
     if user_lupax and user_lupax.role == 'admin':
-        return crud.create_notification(db, item)
+        return notifications_service.create_notification(db, item)
     else:
         raise HTTPException(status_code=404)
