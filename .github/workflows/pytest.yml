@@ -2,8 +2,6 @@
 name: PyTest
 on: push
 
-env:
-  env_var: ${{ vars.ENV_CONTEXT_VAR }}
 
 jobs:
   test:
@@ -13,6 +11,8 @@ jobs:
 
 
     steps:
+      - name: demo
+        run: echo "holaaaaaaaaaa $DB_URL"
       - name: Checkout
         uses: actions/checkout@v2
         with:
