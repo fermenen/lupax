@@ -6,17 +6,13 @@ env:
   # Setting an environment variable with the value of a configuration variable
   env_var: ${{ vars.ENV_CONTEXT_VAR }}
 
-
 jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
-
-
     steps:
-      - name: demo
-        run: echo "holaaaaaaaaaa ${{ vars.DB_URL }}"
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -43,4 +39,10 @@ jobs:
           DB_NAME: ${{ vars.DB_NAME }}
           DB_USER: ${{ vars.DB_USER }}
           DB_PASS: ${{ vars.DB_PASS }}
+          URI_SUPERTOKEN: ${{ vars.URI_SUPERTOKEN }}
+          API_SUPERTOKEN: ${{ vars.API_SUPERTOKEN }}
+          GCLOUD_PROJECT: ''
+          BUCKET: ''
+          CLIENT_ID_AUTH: ''
+          CLIENT_SECRET_AUTH: ''
         run: poetry run pytest
