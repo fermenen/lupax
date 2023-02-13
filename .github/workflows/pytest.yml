@@ -40,4 +40,7 @@ jobs:
         working-directory: ./backend
         env:
           DB_URL: ${{ vars.DB_URL }}
+          DB_NAME: ${{ vars.DB_NAME }}
+          DB_USER: ${{ vars.DB_USER }}
+          DB_PASS: ${{ vars.DB_PASS }}
         run: poetry run pytest
