@@ -45,4 +45,7 @@ jobs:
           BUCKET: ''
           CLIENT_ID_AUTH: ''
           CLIENT_SECRET_AUTH: ''
+          DSN_GLITCHTIP: 'https://edd50473a38a48d3925185b37244db77@app.glitchtip.com/999'
+          API_DOMAIN: http://localhost:8000
+          ALLOW_ORIGIN: http://localhost:3000
         run: poetry run pytest
