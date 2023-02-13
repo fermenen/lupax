@@ -2,13 +2,15 @@
 name: PyTest
 on: push
 
+env:
+  env_var: ${{ vars.ENV_CONTEXT_VAR }}
+
 jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
-  env:
-    env_var: ${{ vars.ENV_CONTEXT_VAR }}
+
 
     steps:
       - name: Checkout
