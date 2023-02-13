@@ -3,7 +3,6 @@ import datetime
 import requests
 import sentry_sdk
 from fastapi import FastAPI
-from sqlalchemy import sql
 from typing import List, Dict, Any, Union
 from starlette.middleware.cors import CORSMiddleware
 from supertokens_python import init, get_all_cors_headers, InputAppInfo, SupertokensConfig
@@ -137,7 +136,7 @@ def ping():
 @app.get("/db/", include_in_schema=False)
 def db_test():
     t1 = datetime.datetime.now()
-    sql.select([1])
+    engine.execute("SELECT 1;")
     t2 = datetime.datetime.now()
     return {"time": t2 - t1}
 
