@@ -2,6 +2,10 @@
 name: PyTest
 on: push
 
+env:
+  # Setting an environment variable with the value of a configuration variable
+  env_var: ${{ vars.ENV_CONTEXT_VAR }}
+
 
 jobs:
   test:
@@ -12,7 +16,7 @@ jobs:
 
     steps:
       - name: demo
-        run: echo "holaaaaaaaaaa $DB_URL"
+        run: echo "holaaaaaaaaaa ${{ vars.DB_URL }}"
       - name: Checkout
         uses: actions/checkout@v2
         with:
