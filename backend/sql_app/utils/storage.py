@@ -1,6 +1,6 @@
 import os
-from google.cloud import storage
 import datetime
+from google.cloud import storage
 from google.auth import compute_engine
 
 class StorageCloud(object):
