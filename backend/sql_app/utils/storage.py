@@ -19,7 +19,7 @@ class StorageCloud(object):
     def get_temporary_url(self, file, minutes=40, bucket=os.environ.get('BUCKET')):
         bucket = self.get_bucket(bucket)
         blob = bucket.blob(file)
-        return "https://storage.googleapis.com/{}/{}".format(bucket, blob)
+        return "https://storage.googleapis.com/{}/{}".format(bucket.name, blob.name)
         url = blob.generate_signed_url(
             version="v4", expiration=datetime.timedelta(minutes=minutes), method="GET")
         return url
