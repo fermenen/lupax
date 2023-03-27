@@ -6,7 +6,9 @@
 # lupax
 
 [![PyTest](https://github.com/fermenen/lupax/actions/workflows/pytest.yml/badge.svg?branch=master)](https://github.com/fermenen/lupax/actions/workflows/pytest.yml)
-[![License](https://img.shields.io/github/license/lupax/lupax.svg)](https://github.com/fermenen/lupax/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/fermenen/lupax)](https://github.com/fermenen/lupax/blob/master/LICENSE)
+[![webstore](https://img.shields.io/chrome-web-store/rating/ccpeofkekcfjdogoidliojmodhpieplg)](https://chrome.google.com/webstore/detail/lupax/ccpeofkekcfjdogoidliojmodhpieplg?hl=es&authuser=0)
+[![Twitter](https://img.shields.io/twitter/follow/lupax_app?style=social)](https://twitter.com/lupax_app/)
 
 Lupax is a user experience research software that will allow you to really know your users. It's an open source project focused on improving usability and UX, designed to create a user-friendly platform that can be used by anyone, regardless of their technical expertise.
 
