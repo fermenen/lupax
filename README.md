@@ -13,6 +13,10 @@
 Lupax is a user experience research software that will allow you to really know your users. It's an open source project focused on improving usability and UX, designed to create a user-friendly platform that can be used by anyone, regardless of their technical expertise.
 
 
+## Authors
+
+Fernando Menéndez ([@fermenen](https://github.com/fermenen)) and 
+[contributors](https://github.com/fermenen/lupax/contributors).
 
 ## Contributing
 Do you want to contribute to this? Please do so. I am happy to add changes, improvements, and bug fixes to this repo. Please see the [CONTRIBUTING.md](https://github.com/fermenen/lupax/blob/master/CONTRIBUTING.md) file for instructions.
