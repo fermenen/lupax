@@ -77,6 +77,3 @@ poetry run pytest
 
 For any queries, or support requests, please email us at support@lupax.app
 
-## Authors
-
-Fernando Menéndez Menéndez - UO251800@uniovi.es
