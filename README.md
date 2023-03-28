@@ -3,7 +3,7 @@
 </p>
 
 
-# lupax
+# lupax.
 
 [![PyTest](https://github.com/fermenen/lupax/actions/workflows/pytest.yml/badge.svg?branch=master)](https://github.com/fermenen/lupax/actions/workflows/pytest.yml)
 [![License](https://img.shields.io/github/license/fermenen/lupax)](https://github.com/fermenen/lupax/blob/master/LICENSE)
