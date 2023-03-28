@@ -63,7 +63,3 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Contact us
 
 For any queries, or support requests, please email us at support@lupax.app
-
-## Authors
-
-Fernando Menéndez Menéndez - UO251800@uniovi.es
