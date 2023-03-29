@@ -7,6 +7,7 @@
 
 [![PyTest](https://github.com/fermenen/lupax/actions/workflows/pytest.yml/badge.svg?branch=master)](https://github.com/fermenen/lupax/actions/workflows/pytest.yml)
 [![License](https://img.shields.io/github/license/fermenen/lupax)](https://github.com/fermenen/lupax/blob/master/LICENSE)
+[![Dsicord](https://img.shields.io/discord/1089954496362319952)](https://discord.com/channels/1089954496362319952/)
 [![webstore](https://img.shields.io/chrome-web-store/rating/ccpeofkekcfjdogoidliojmodhpieplg)](https://chrome.google.com/webstore/detail/lupax/ccpeofkekcfjdogoidliojmodhpieplg?hl=es&authuser=0)
 [![Twitter](https://img.shields.io/twitter/follow/lupax_app?style=social)](https://twitter.com/lupax_app/)
 
