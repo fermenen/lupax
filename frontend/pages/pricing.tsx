@@ -34,6 +34,7 @@ function PriceWrapper({ children }: { children: ReactNode }) {
             borderWidth="1px"
             alignSelf={{ base: 'center', lg: 'flex-start' }}
             borderColor={useColorModeValue('gray.200', 'gray.500')}
+            bg="white"
             borderRadius={'xl'}>
             {children}
         </Box>
@@ -82,7 +83,7 @@ export default function Pricing() {
                     </Box>
 
                     <VStack
-                        bg={useColorModeValue('gray.50', 'gray.700')}
+                        bg={useColorModeValue('white', 'gray.700')}
                         py={4}
                         borderBottomRadius={'xl'}>
                         <List spacing={3} textAlign="start" px={12}>
@@ -123,4 +124,3 @@ export default function Pricing() {
     )
 
 }
-
