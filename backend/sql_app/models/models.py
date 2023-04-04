@@ -43,7 +43,7 @@ class Users(Base):
 
     @property
     def register_social(self):
-        return True  if hasattr(get_users_by_email(self.email)[0], 'thirdParty') else False
+        return True if get_users_by_email(self.email)[0].third_party_info != None else False
 
     def __repr__(self):
         return "<User(name='%s', last_name='%s', email='%s')>" % (self.name, self.last_name, self.email)
