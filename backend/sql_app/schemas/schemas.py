@@ -194,6 +194,7 @@ class User(UserBase):
     role: str
     profile_picture: Optional[str]
     preferences: Optional[Preferences]
+    register_social: Optional[bool]
 
     class Config:
         orm_mode = True

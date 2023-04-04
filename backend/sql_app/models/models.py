@@ -3,6 +3,7 @@ import enum
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime, Table, Enum
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship, backref
+from supertokens_python.recipe.thirdpartyemailpassword.syncio import get_users_by_email
 from ..config.database import Base
 from ..utils.gravatar import Gravatar
 from ..utils.storage import StorageCloud
@@ -39,6 +40,10 @@ class Users(Base):
             return self.picture
         else:
             return Gravatar(self.email).get_image(default="retro")
+
+    @property
+    def register_social(self):
+        return True if get_users_by_email(self.email)[0].third_party_info != None else False
 
     def __repr__(self):
         return "<User(name='%s', last_name='%s', email='%s')>" % (self.name, self.last_name, self.email)
