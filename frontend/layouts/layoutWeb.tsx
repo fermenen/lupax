@@ -153,7 +153,7 @@ export default function GetLayoutWeb(page: ReactElement) {
                 bottom="0"
                 width="100%"
                 height={heightFooter}>
-                <Container as={Stack} maxW={'6xl'} py={10}>
+                <Container as={Stack} maxW={'6xl'} py={10} bg={useColorModeValue('gray.50', 'gray.900')}>
                     <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
                         <Stack align={'flex-start'}>
                             <ListHeader>Support</ListHeader>
