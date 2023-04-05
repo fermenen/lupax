@@ -155,9 +155,9 @@ export default function Register(): JSX.Element {
                                 p={8}>
                                 <Stack spacing={4}>
 
-                                    <HStack>
-                                        <Box>
-                                            <Field name='name' >
+                                    <HStack flexDirection={{base:'column',sm:'row'}} alignItems={{base:'flex-start'}}>
+                                        <Box width={{base:'100%'}}>
+                                            <Field name='name'>
                                                 {({ field, form }: any) => (
                                                     <FormControl isInvalid={form.errors.name && form.touched.name}>
                                                         <FormLabel htmlFor='name'>First Name</FormLabel>
@@ -167,11 +167,11 @@ export default function Register(): JSX.Element {
                                                 )}
                                             </Field>
                                         </Box>
-                                        <Box>
-                                            <Field name='last_name' >
+                                        <Box width={{base:'100%'}}  ml={{base:'0rem !important',sm:'0.5rem !important'}}>
+                                            <Field name='last_name'>
                                                 {({ field, form }: any) => (
                                                     <FormControl isInvalid={form.errors.last_name && form.touched.last_name}>
-                                                        <Flex justifyContent={'space-between'}>
+                                                        <Flex justifyContent={'space-between'} marginTop={{base:'1rem',sm:'0rem'}}>
                                                             <FormLabel htmlFor='last_name'>Last name</FormLabel>
                                                             <Text color={'gray'}>Optional</Text>
                                                         </Flex>
