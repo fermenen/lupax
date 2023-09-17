@@ -14,19 +14,19 @@ import {
     StackDivider,
     Icon,
     useColorModeValue,
+    Link
 } from '@chakra-ui/react';
+
 import {
     IoAnalyticsSharp,
     IoPeopleSharp,
     IoRadioButtonOnSharp,
-    IoRocketSharp
+    IoRocketSharp,
+    IoThumbsUp
 } from 'react-icons/io5';
 
 
-
-
 Features.getLayout = GetLayoutWeb
-
 
 interface FeatureProps {
     text: string;
@@ -114,16 +114,53 @@ export default function Features() {
                         rounded={'md'}
                         alt={'user experience'}
                         src={
-                            'https://images.unsplash.com/flagged/photo-1550946107-8842ae9426db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80'
+                            'ux-photo-lupax.avif'
                         }
                         objectFit={'cover'}
                     />
                 </Flex>
             </SimpleGrid>
+
+            <Flex flexDirection={{ base: 'column-reverse', md: 'row' }} gap={10} mt={28}>
+                <Flex>
+                    <Image
+                        w="full"
+                        rounded={'md'}
+                        alt={'typeform logo'}
+                        src={'typeform.webp'}
+                        objectFit={'cover'}
+                    />
+                </Flex>
+                <Stack spacing={6}>
+                    <Heading>Integration with Typeform in one click</Heading>
+                    <Text color={'gray.500'} fontSize={'lg'}>
+                        Harness the simplicity of our one-click integration with <Link href='https://www.typeform.com/' isExternal>Typeform™</Link> and revolutionize your user experience research process. Start refining your digital experiences today.
+                    </Text>
+                    <Stack
+                        spacing={4}
+                        divider={
+                            <StackDivider
+                                borderColor={useColorModeValue('gray.100', 'gray.700')}
+                            />
+                        }>
+                        <Feature
+                            icon={
+                                <Icon as={IoThumbsUp} color={'blue.500'} w={5} h={5} />
+                            }
+                            iconBg={useColorModeValue('blue.100', 'blue.900')}
+                            text={'Forms that users answer'}
+                        />
+
+                    </Stack>
+                </Stack>
+            </Flex>
+
+            <Text mt={20} fontSize='sm'>
+                <Link href='https://www.typeform.com/' isExternal>Typeform™</Link> is a registered trademark of TYPEFORM, S.L.
+            </Text>
+
         </Container>
 
 
     )
-
-
 }
