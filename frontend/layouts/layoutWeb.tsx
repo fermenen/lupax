@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import NextLink from "next/link";
 import React, { ReactNode } from 'react';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaXTwitter } from 'react-icons/fa6';
 import { ChevronDownIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { FiHome } from 'react-icons/fi';
 import { Logo } from '../components/svg/logo';
@@ -190,8 +190,8 @@ export default function GetLayoutWeb(page: ReactElement) {
                             <SocialButton label={'GitHub'} href={'https://github.com/fermenen/lupax'}>
                                 <FaGithub />
                             </SocialButton>
-                            <SocialButton label={'Twitter'} href={'https://www.twitter.com/lupax_app/'}>
-                                <FaTwitter />
+                            <SocialButton label={'Twitter'} href={'https://www.x.com/lupax_app/'}>
+                                <FaXTwitter />
                             </SocialButton>
                             <SocialButton label={'LinkedIn'} href={'https://www.linkedin.com/company/lupax-app/'}>
                                 <FaLinkedin />
