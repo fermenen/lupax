@@ -68,7 +68,11 @@ interface NavItemProps extends FlexProps {
   notification?: Number;
 }
 
-interface NavLinkProps extends NavItemProps {
+interface NavLinkProps {
+  icon: IconType;
+  href: string;
+  text: ReactText;
+  notification?: Number;
   color_hover?: string;
 }
 
