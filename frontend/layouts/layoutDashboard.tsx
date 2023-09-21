@@ -3,17 +3,16 @@ import NextLink from "next/link";
 import Head from 'next/head';
 import EmailPasswordAuthNoSSR from './ProtectingRoute';
 import React, { ReactNode } from 'react';
-import type { ReactElement } from 'react'
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
-import { useRouter } from 'next/router';
-import { successAlert } from '../services/alert.service';
 import { Logo } from "../components/svg/logo";
 import { LogoIcon } from "../components/svg/logoIcon";
 import { myColors } from '../theme/theme';
-import { useSWRConfig } from 'swr';
-import { useUser, LogoutUser } from '../services/users.service';
+import { useUser } from '../services/users.service';
 import { filterNotifications, useNotifications } from '../services/notifications.service';
+import { ModalHelp } from './components/ModalHelp';
+import { Logout } from './components/Logout';
+import type { ReactElement } from 'react'
 
 import {
   extendTheme,
@@ -33,13 +32,6 @@ import {
   Text,
   useDisclosure,
   FlexProps,
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
   Skeleton,
   Stack,
   Tag,
@@ -56,8 +48,6 @@ import {
   FiMousePointer,
   FiLogOut,
   FiAlertCircle,
-  FiTwitter,
-  FiMail,
   FiSliders
 } from 'react-icons/fi';
 
@@ -74,10 +64,15 @@ interface NavItemProps extends FlexProps {
   icon: IconType;
   href: string;
   text: ReactText;
+  onClick: () => void;
   notification?: Number;
 }
 
-interface NavLinkProps extends NavItemProps {
+interface NavLinkProps {
+  icon: IconType;
+  href: string;
+  text: ReactText;
+  notification?: Number;
   color_hover?: string;
 }
 
@@ -175,11 +170,11 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         }
         {!isLoading && !isError &&
           <Flex direction={'column'}>
-            <NavItem icon={FiHome} href={'/my/dashboard'} text={'Dashboard'} notification={Number(notifications.filter(filterNotifications(user)).length)} />
-            <NavItem icon={FiMousePointer} href={'/my/studies'} text={'Studies'} />
-            <NavItem icon={FiUsers} href={'/my/teams'} text={'Teams'} />
+            <NavItem icon={FiHome} href={'/my/dashboard'} text={'Dashboard'} onClick={onClose} notification={Number(notifications.filter(filterNotifications(user)).length)} />
+            <NavItem icon={FiMousePointer} href={'/my/studies'} text={'Studies'} onClick={onClose} />
+            <NavItem icon={FiUsers} href={'/my/teams'} text={'Teams'} onClick={onClose} />
             {user.role === 'admin' &&
-              <NavItem key={'admin'} icon={FiSliders} href={'/my/admin'} text={'Admin'} />
+              <NavItem key={'admin'} icon={FiSliders} href={'/my/admin'} text={'Admin'} onClick={onClose} />
             }
           </Flex>
         }
@@ -234,10 +229,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 };
 
 
-const NavItem = ({ href, icon, text, notification, ...rest }: NavItemProps) => {
+const NavItem = ({ href, icon, text, onClick, notification, ...rest }: NavItemProps) => {
   return (
     <NextLink href={href} passHref>
-      <Link style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+      <Link onClick={onClick} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
         <Flex
           align="center"
           p="4"
@@ -275,7 +270,6 @@ const NavItem = ({ href, icon, text, notification, ...rest }: NavItemProps) => {
 };
 
 
-
 function NavLink({ icon, href, color_hover = 'gray.800', text, ...rest }: NavLinkProps) {
 
   return (
@@ -301,73 +295,3 @@ function NavLink({ icon, href, color_hover = 'gray.800', text, ...rest }: NavLin
   )
 }
 
-
-
-function Logout({ children }: { children: ReactElement }) {
-
-  const key_url_api_me = `${process.env.NEXT_PUBLIC_URL_BASE_API}/me/`;
-  const router = useRouter();
-  const { mutate } = useSWRConfig();
-
-  async function handelLogout() {
-  
-    if (await LogoutUser() == true) {
-      mutate(key_url_api_me)
-      router.push('/').then(() => {
-        successAlert('', 'Successful logout');
-      })
-    }
-  }
-
-  return (
-    <Box onClick={handelLogout}>
-      {children}
-    </Box>
-  )
-
-}
-
-
-
-function ModalHelp({ children }: { children: ReactNode }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  return (
-    <>
-      <Box onClick={onOpen}>
-        {children}
-      </Box>
-      <Modal
-        isCentered
-        isOpen={isOpen}
-        onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            Get support
-            <Text fontSize='sm' color='gray.500'>We’re here to help you get the most out of lupax.</Text>
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Flex p={1} mb={1}>
-              <LinkBox>
-                <LinkOverlay href='mailto:support@lupax.app' isExternal>
-                  <Button leftIcon={<Icon as={FiMail} />} colorScheme='teal' variant='ghost'>
-                    support@lupax.app
-                  </Button>
-                </LinkOverlay>
-              </LinkBox>
-              <LinkBox>
-                <LinkOverlay href='https://twitter.com/lupax_app/' isExternal>
-                  <Button leftIcon={<Icon as={FiTwitter} />} colorScheme='teal' variant='ghost'>
-                    @lupax_app
-                  </Button>
-                </LinkOverlay>
-              </LinkBox>
-            </Flex>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </>
-  )
-}

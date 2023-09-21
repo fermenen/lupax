@@ -12,7 +12,7 @@ export default function BarPage(props: BarPageProps) {
 
     return (
         <>
-            <Flex mb={9}>
+            <Flex mb={{ base: 5, md: 9 }}>
                 <Heading>{props.title}</Heading>
                 <Spacer></Spacer>
                 {props.children &&
