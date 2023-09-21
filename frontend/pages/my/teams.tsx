@@ -226,17 +226,17 @@ export default function Team() {
                                         }}>
                                         {(props) => (
                                             <Form>
-                                                <Flex>
+                                                <Flex direction={{ base: "column", md: "row" }}>
                                                     <Field name='user_email' >
                                                         {({ field, form }: any) => (
-                                                            <FormControl width={'max-content'} isInvalid={form.errors.user_email && form.touched.user_email}>
+                                                            <FormControl width={'auto'} isInvalid={form.errors.user_email && form.touched.user_email}>
                                                                 <Input {...field} id='user_email' variant='filled' placeholder='colleague@company.com' />
-                                                                <FormErrorMessage ml={1}>{form.errors.user_email}</FormErrorMessage>
+                                                                <FormErrorMessage>{form.errors.user_email}</FormErrorMessage>
                                                             </FormControl>
                                                         )}
                                                     </Field>
                                                     <Button leftIcon={<Icon as={FiUserPlus} />} type="submit" isLoading={props.isSubmitting}
-                                                        ml={2}>Invite member</Button>
+                                                        ml={{ md: 2 }} mt={{ base: 2, md: 0 }}>Invite member</Button>
                                                 </Flex>
                                             </Form>
                                         )}
