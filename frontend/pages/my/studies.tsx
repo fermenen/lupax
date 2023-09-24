@@ -11,7 +11,7 @@ import { CardCreate } from "../../components/card";
 import { capitalizeFirstLetter } from '../../services/util.service';
 import { getLayoutDashboard } from '../../layouts/layoutDashboard';
 import { useStudies } from "../../services/studies.service";
-import { StudieBasic, User } from "../../interfaces";
+import { StudieBasic } from "../../interfaces";
 import { StudieSvg } from "../../components/svg/studie";
 
 import {
@@ -26,8 +26,7 @@ import {
     LinkOverlay,
     Text,
     Box,
-    Wrap,
-    WrapItem,
+    SimpleGrid,
 } from '@chakra-ui/react'
 
 
@@ -59,76 +58,80 @@ export default function Studies() {
         )
     }
 
-
     return (
         <Main>
             <BarPage title="All studies" />
-            <Wrap spacing='40px'>
-                <WrapItem key={'create'}>
-                    <CreateStudie>
-                        <CardCreate text={'Create study'} props={{ width: "400px" }} />
-                    </CreateStudie>
-                </WrapItem>
+            <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} spacing={10}>
+                <CreateStudie>
+                    <CardCreate text={'Create study'} />
+                </CreateStudie>
                 {studies.map((studie: StudieBasic) =>
-                    <WrapItem key={studie.id}>
-                        <LinkBox as='article' minWidth={'400px'} maxWidth={'400px'}>
-                            <NextLink href={`/my/studies/${studie.id}/overview`} passHref>
-                                <LinkOverlay>
-                                    <Box
-                                        bg={'white'}
-                                        boxShadow={'2xl'}
-                                        rounded={'md'}
-                                        p={6}
-                                        height='230px'
-                                        overflow={'hidden'}>
-                                        <Flex
-                                            direction={'column'}
-                                            justifyContent={'space-between'}
-                                            height={'100%'}>
-                                            <VStack
-                                                align='stretch'
-                                                spacing={3}>
-                                                <Heading
-                                                    color={'gray.700'}
-                                                    fontSize={'2xl'}
-                                                    fontFamily={'body'}
-                                                    noOfLines={1}>
-                                                    {capitalizeFirstLetter(studie.private_studie_title)}
-                                                </Heading>
-                                                <Divider />
-                                                <HStack spacing={2}>
-                                                    {studie.is_published &&
-                                                        <Tag colorScheme='green' width={'max-content'}>Published</Tag>
-                                                    }
-                                                    {studie.participants == studie.audience_max &&
-                                                        <Tag colorScheme='orange' width={'max-content'}>{studie.participants}/{studie.audience_max} participants</Tag>
-                                                    }
-                                                    {studie.participants != studie.audience_max &&
-                                                        <Tag width={'max-content'}>{studie.participants}/{studie.audience_max} participants</Tag>
-                                                    }
-                                                </HStack>
-                                                {!studie.team_id &&
-                                                    <Text color={'gray.500'} noOfLines={4}>
-                                                        {capitalizeFirstLetter(studie.studie_description)}
-                                                    </Text>
-                                                }
-                                                {studie.team_id &&
-                                                    <Flex direction={'column'} justifyContent={'space-between'}>
-                                                        <Text color={'gray.500'} noOfLines={2} mb={2}>
-                                                            {capitalizeFirstLetter(studie.studie_description)}
-                                                        </Text>
-                                                        <AvatarGroupTeam team_id={studie.team_id} max_items={2} name_team={true} />
-                                                    </Flex>
-                                                }
-                                            </VStack>
-                                        </Flex>
-                                    </Box>
-                                </LinkOverlay>
-                            </NextLink>
-                        </LinkBox>
-                    </WrapItem>
+                    <CardStudie key={studie.id} studie={studie} />
                 )}
-            </Wrap>
+            </SimpleGrid>
         </Main>
     );
+}
+
+
+function CardStudie({ studie }: { studie: StudieBasic }) {
+
+    return (
+        <LinkBox as='article' width={"100%"}>
+            <NextLink href={`/my/studies/${studie.id}/overview`} passHref>
+                <LinkOverlay>
+                    <Box
+                        bg={'white'}
+                        boxShadow={'2xl'}
+                        rounded={'md'}
+                        p={6}
+                        height='230px'
+                        overflow={'hidden'}>
+                        <Flex
+                            direction={'column'}
+                            justifyContent={'space-between'}
+                            height={'100%'}>
+                            <VStack
+                                align='stretch'
+                                spacing={3}>
+                                <Heading
+                                    color={'gray.700'}
+                                    fontSize={'2xl'}
+                                    fontFamily={'body'}
+                                    noOfLines={1}>
+                                    {capitalizeFirstLetter(studie.private_studie_title)}
+                                </Heading>
+                                <Divider />
+                                <HStack spacing={2}>
+                                    {studie.is_published &&
+                                        <Tag colorScheme='green' width={'max-content'}>Published</Tag>
+                                    }
+                                    {studie.participants == studie.audience_max &&
+                                        <Tag colorScheme='orange' width={'max-content'}>{studie.participants}/{studie.audience_max} participants</Tag>
+                                    }
+                                    {studie.participants != studie.audience_max &&
+                                        <Tag width={'max-content'}>{studie.participants}/{studie.audience_max} participants</Tag>
+                                    }
+                                </HStack>
+                                {!studie.team_id &&
+                                    <Text color={'gray.500'} noOfLines={4}>
+                                        {capitalizeFirstLetter(studie.studie_description)}
+                                    </Text>
+                                }
+                                {studie.team_id &&
+                                    <Flex direction={'column'} justifyContent={'space-between'}>
+                                        <Text color={'gray.500'} noOfLines={2} mb={2}>
+                                            {capitalizeFirstLetter(studie.studie_description)}
+                                        </Text>
+                                        <AvatarGroupTeam team_id={studie.team_id} max_items={2} name_team={true} />
+                                    </Flex>
+                                }
+                            </VStack>
+                        </Flex>
+                    </Box>
+                </LinkOverlay>
+            </NextLink>
+        </LinkBox>
+    )
+
 }
