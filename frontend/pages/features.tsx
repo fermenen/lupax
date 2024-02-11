@@ -113,9 +113,7 @@ export default function Features() {
                         w="full"
                         rounded={'md'}
                         alt={'user experience'}
-                        src={
-                            'ux-photo-lupax.avif'
-                        }
+                        src={'/ux-photo-lupax.avif'}
                         objectFit={'cover'}
                     />
                 </Flex>
@@ -127,7 +125,7 @@ export default function Features() {
                         w="full"
                         rounded={'md'}
                         alt={'typeform logo'}
-                        src={'typeform.webp'}
+                        src={'/typeform.webp'}
                         objectFit={'cover'}
                     />
                 </Flex>
@@ -160,7 +158,6 @@ export default function Features() {
             </Text>
 
         </Container>
-
 
     )
 }
