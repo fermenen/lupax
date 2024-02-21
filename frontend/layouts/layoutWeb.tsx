@@ -6,6 +6,7 @@ import { ChevronDownIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { FiHome } from 'react-icons/fi';
 import { Logo } from '../components/svg/logo';
 import { useUserLogin } from '../services/users.service';
+import { WebsiteCarbonBadge } from 'react-websitecarbon-badge';
 import type { ReactElement } from 'react';
 
 import {
@@ -186,6 +187,7 @@ export default function GetLayoutWeb(page: ReactElement) {
                         <Text >
                             &copy; {new Date().getFullYear()} lupax. All rights reserved.
                         </Text>
+                        <WebsiteCarbonBadge url="lupax-app" co2="0.21" percentage="78"/>
                         <Stack direction={'row'} spacing={6}>
                             <SocialButton label={'GitHub'} href={'https://github.com/fermenen/lupax'}>
                                 <FaGithub />
