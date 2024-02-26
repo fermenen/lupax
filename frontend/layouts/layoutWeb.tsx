@@ -32,6 +32,21 @@ import {
 } from '@chakra-ui/react';
 
 
+const NAV_ITEMS: Array<NavItem> = [
+    {
+        label: 'Features',
+        href: '/features',
+    },
+    {
+        label: 'Pricing',
+        href: '/pricing',
+    },
+    {
+        label: 'UX Consulting',
+        href: '/ux-consulting',
+    },
+];
+
 
 export default function GetLayoutWeb(page: ReactElement) {
 
@@ -48,7 +63,7 @@ export default function GetLayoutWeb(page: ReactElement) {
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 </Head>
-                <NavbarWeb/>
+                <NavbarWeb />
                 <Box
                     as="main"
                     paddingBottom={heightFooter}>
@@ -187,7 +202,7 @@ export default function GetLayoutWeb(page: ReactElement) {
                         <Text >
                             &copy; {new Date().getFullYear()} lupax. All rights reserved.
                         </Text>
-                        <WebsiteCarbonBadge url="lupax-app" co2="0.21" percentage="78"/>
+                        <WebsiteCarbonBadge url="lupax-app" co2="0.21" percentage="78" />
                         <Stack direction={'row'} spacing={6}>
                             <SocialButton label={'GitHub'} href={'https://github.com/fermenen/lupax'}>
                                 <FaGithub />
@@ -246,23 +261,14 @@ const SocialButton = ({
     );
 };
 
-const NAV_ITEMS: Array<NavItem> = [
-    {
-        label: 'Features',
-        href: '/features',
-    },
-    {
-        label: 'Pricing',
-        href: '/pricing',
-    },
-];
+
 
 const DesktopNav = () => {
 
     return (
         <Stack direction={'row'} spacing={5}>
             {NAV_ITEMS.map((navItem) => (
-                <NextLink  key={navItem.label} href={navItem.href ?? '#'} passHref>
+                <NextLink key={navItem.label} href={navItem.href ?? '#'} passHref>
                     <Button
                         as={'a'}
                         fontSize={'lg'}
@@ -346,4 +352,3 @@ interface NavItem {
     children?: Array<NavItem>;
     href?: string;
 }
-
