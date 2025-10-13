@@ -3,7 +3,7 @@ import Loading from "../../components/loading";
 import Main from "../../components/main";
 import TableReact from "../../components/table";
 import React from "react";
-import BarPage from "../../components/barPage";
+import BarAdmin from "../../components/barAdmin";
 import { CardIcon } from "../../components/card";
 import { getLayoutDashboard } from "../../layouts/layoutDashboard"
 import { errorAlert, successAlert } from "../../services/alert.service";
@@ -63,8 +63,8 @@ export default function Admin() {
 
     return (
         <>
+            <BarAdmin />
             <Main>
-                <BarPage title="Admin" />
                 <VStack
                     spacing={6}
                     align='stretch'
